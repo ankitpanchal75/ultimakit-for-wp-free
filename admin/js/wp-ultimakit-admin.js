@@ -68,7 +68,7 @@
 		        form_data.append('nonce', ultimakit_ajax.nonce); // Security nonce
 
 		        const toastConf = {
-					timeOut: 1500, // Adjust display time as needed (in milliseconds).
+					timeOut: 1000, // Adjust display time as needed (in milliseconds).
 					positionClass: 'toast-top-right', // Adjust position as needed.
 					progressBar: true, // Show a progress bar.
 					closeButton: true,
@@ -106,7 +106,7 @@
 				function (event) {
 					const restUrl   = ultimakit_ajax.url;
 					const toastConf = {
-						timeOut: 1500, // Adjust display time as needed (in milliseconds).
+						timeOut: 1000, // Adjust display time as needed (in milliseconds).
 						positionClass: 'toast-top-right', // Adjust position as needed.
 						progressBar: true, // Show a progress bar.
 						closeButton: true,
@@ -166,7 +166,7 @@
 
 					const restUrl   = ultimakit_ajax.url;
 					const toastConf = {
-						timeOut: 1500, // Adjust display time as needed (in milliseconds).
+						timeOut: 1000, // Adjust display time as needed (in milliseconds).
 						positionClass: 'toast-top-right', // Adjust position as needed.
 						progressBar: true, // Show a progress bar.
 						closeButton: true,
@@ -198,6 +198,12 @@
 									} else {
 										jQuery( '.' + module_id ).hide();
 									}
+									setTimeout(
+										function () {
+											window.location.reload();
+										},
+										1000
+									);
 								} else {
 									toastr.error( response.data.message, '', toastConf );
 								}
@@ -216,6 +222,7 @@
 					e.preventDefault(); // Prevent the default form submit.
 					let settingData = {};
 					let module_id   = $( this ).attr( 'id' );
+
 					$( '#' + module_id ).find( ':input' ).each(
 						function () {
 							if (this.name && ! this.disabled) {
@@ -233,6 +240,12 @@
 							}
 						}
 					);
+
+					let customOption = null;
+					if ($('.wpuk_save_module_settings').length > 0) {
+					    customOption = $('.wpuk_save_module_settings').attr('custom-option');
+						settingData['custom_option'] = customOption;
+					}
 
 					// You can use 'inputData' as needed, like sending to server via AJAX.
 					const restUrl   = ultimakit_ajax.url;
@@ -270,7 +283,7 @@
 											$( '.wpuk_modal' ).hide();
 											window.location.reload();
 										},
-										2000
+										1000
 									);
 								} else {
 									// Display an error toast.

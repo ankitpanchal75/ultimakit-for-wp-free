@@ -11,6 +11,17 @@
         "settings": "no"
     },
     {
+        "id": "ultimakit_advanced_custom_js_css",
+        "name": "Advanced Custom JS & CSS",
+        "description": "Add multiple Javascript and CSS snippets your website.",
+        "category": "Utilities",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "add-custom-css-and-js-scripts-to-your-wordpress-website",
+        "is_active": false,
+        "settings": "no"
+    },
+    {
         "id": "ultimakit_module_debug_mode",
         "name": "Debug Mode",
         "description": "Activate the Debug mode. (*This module is critical. Please review the help article before activating it.)",

@@ -1,15 +1,15 @@
 === The Essential WordPress Toolkit - UltimaKit For WP ===
-Contributors: ankitmaru, ankitpanchal
+Contributors: ankitmaru, ankitpanchal, freemius
 Donate link: https://wpankit.com/
 Tags: optimizations, tools, enhancements, widgets, tweaks
 Requires at least: 5.6
 Tested up to: 6.5.3
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
+Simplify WordPress. Manage content, customize design, enhance security – one plugin.
 
 == Description ==
 
@@ -48,6 +48,8 @@ The WordPress Toolkit Built With You in Mind. Essential features, ongoing develo
 21. [SVG Upload](https://wpultimakit.com/svg-upload-in-wordpress/) - Files can only be uploaded by logged in users.
 22. [User Last Login Timestamp](https://wpultimakit.com/user-last-login-timestamp-in-wordpress/) - Displays the exact date and time a user last logged into your website, helping you track user activity.
 23. [Wider Admin Menu](https://wpultimakit.com/wider-admin-menu-in-wordpress/) - Give the admin menu more room to better accommodate wider items.
+24. [Custom CSS](https://wpultimakit.com/features/add-custom-css-in-wordpress/) - Add Custom CSS on Frontend.
+25. [Custom JS](https://wpultimakit.com/features/add-custom-js-in-wordpress/) - Add Custom JS on Frontend.
 
 ### Pro Modules
 1. [Admin UI](https://wpultimakit.com/customise-admin-ui-in-wordpress/) - Easily customize the WordPress admin interface.
@@ -65,9 +67,10 @@ The WordPress Toolkit Built With You in Mind. Essential features, ongoing develo
 13. [Post Type Switcher](https://wpultimakit.com/post-type-switcher-in-wordpress/) - Switch post type between available post types quickly and easily.
 14. [Quick Admin Search](https://wpultimakit.com/quick-search-posts-and-terms-from-admin-panel-in-wordpress) - Effortlessly Navigate Through the Admin Panel
 15. [SMTP Email](https://wpultimakit.com/configure-smtp-in-wordpress/) - The SMTP email module improves the delivery of email.
+15. [Advanced Custom JS & CSS](https://wpultimakit.com/add-custom-css-and-js-scripts-to-your-wordpress-website) - Add multiple Javascript and CSS snippets your website.
 
 ### 🔥 WHAT’S NEXT
-Need a specific feature? We're building 30+ new modules. Submit your request and help shape the future of UltimaKit.
+Need a specific feature? We're building 40+ new modules. Submit your request and help shape the future of UltimaKit.
 
 **Links:**
 
@@ -90,9 +93,49 @@ Need a specific feature? We're building 30+ new modules. Submit your request and
 
 == Frequently Asked Questions ==
 
+= What is UltimaKit For WP? =
+
+UltimaKit For WP is a powerful WordPress plugin designed to streamline customization and enhance your website's functionality. It provides a user-friendly interface with a variety of modules for customising headers, footers, menus, and more – all without coding knowledge.
+
+= Do I need coding skills to use UltimaKit For WP? =
+
+Not at all! UltimaKit For WP is built with ease of use in mind. Its intuitive interface and drag-and-drop functionality make customization simple, even for beginners.
+
+= Is UltimaKit For WP compatible with my current theme and plugins? =
+
+Absolutely! UltimaKit For WP is designed to seamlessly integrate with most well-coded WordPress themes and plugins.
+
+= What kind of support do you offer? =
+
+We offer dedicated support to all UltimaKit For WP Pro users. Feel free to reach out to us through our plugin support section, website or the WordPress support forum if you have any questions or need assistance.
+
 = Is this plugin works with most recent WordPress 6.5.3 release? =
 
 Yes, It works with most recent releases and past releases as well.
+
+= What's the difference between the free and pro versions of UltimaKit For WP? =
+
+The free version offers a limited set of modules, while the pro version unlocks a wide range of advanced features, including more header and footer styles, additional menu options, and priority support and 25+ modules.
+
+= Can I upgrade from the free version to the pro version later? =
+
+Yes! You can upgrade to the pro version at any time to access all the premium features and benefits.
+
+= Is there a refund policy for the pro version? = 
+
+Yes, we offer a 7 days money-back guarantee if you're not satisfied with the pro version.
+
+= How do I install UltimaKit For WP? =
+
+You can easily install UltimaKit For WP by going to your WordPress Dashboard > Plugins > Add New, then search for "UltimaKit For WP." Click "Install Now" and activate the plugin.
+
+= Where can I find documentation and tutorials? =
+
+Detailed documentation and video tutorials can be found on our [Website](https://wpultimakit.com/features/).
+
+= Will UltimaKit For WP slow down my website? =
+
+UltimaKit For WP is optimized for performance and should not significantly affect your website's loading speed. However, as with any plugin, it's recommended to test its impact on your specific setup.
 
 
 == Screenshots ==
@@ -106,14 +149,16 @@ Yes, It works with most recent releases and past releases as well.
 
 == Changelog ==
 
+= 1.1.0 = - 21.05.2024 =
+New modules added: (Free) - Custom CSS, Custom JS, (PRO) - Advanced Custom JS & CSS, Minor Fixes & Improvements.
+
+= 1.0.1 = - 12.05.2024 =
+Settings page added.
+
 = 1.0.0 = - 07.05.2024 =
 First release, Included 36+ modules (Free/Pro)
 
-= 1.0.1 = - 12.05.2024 =
-Added settings page, A new module (Quick Admin Search) added in Pro version and other improvements.
-
 == Upgrade Notice ==
 
-= 1.0.0 =
-This is the initial release so no upgrade information here.
-
+= 1.1.0 =
+3+ new modules added, Minor Fixes & Improvements.

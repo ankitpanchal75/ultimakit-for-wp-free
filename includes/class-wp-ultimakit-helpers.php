@@ -5,7 +5,7 @@ class UltimaKit_Helpers {
     }
 
     public function ultimakit_asset_condition() {
-        if ( isset( $_GET['page'] ) && 'wp-ultimakit-dashboard' === $_GET['page'] ) {
+        if ( isset( $_GET['page'] ) && in_array( $_GET['page'], ULTIMAKIT_FOR_WP_ALLOWED_PAGES ) ) {
             return true;
         }
     }
@@ -52,6 +52,7 @@ class UltimaKit_Helpers {
     public function ultimakit_generate_form( $args = array(), $modal_type = '' ) {
         $modal_title = sanitize_text_field( $args['title'] );
         $fields = $args['fields'];
+        $custom_option = ( isset( $args['custom_option'] ) ? $args['custom_option'] : '' );
         ?>
 		<!-- Modal -->
 		<div class="wpuk_modal " id="<?php 
@@ -78,7 +79,9 @@ class UltimaKit_Helpers {
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php 
         esc_html_e( 'Reset', 'ultimakit-for-wp' );
         ?></button>
-						<button type="submit" class="btn btn-primary wpuk_save_module_settings" id="<?php 
+						<button type="submit" class="btn btn-primary wpuk_save_module_settings" custom-option="<?php 
+        echo esc_attr( $custom_option );
+        ?>" id="<?php 
         echo esc_attr( $this->ID );
         ?>_form"><?php 
         esc_html_e( 'Save changes', 'ultimakit-for-wp' );
@@ -95,13 +98,15 @@ class UltimaKit_Helpers {
     public function ultimakit_generate_modal( $args = array(), $modal_type = '' ) {
         $modal_title = sanitize_text_field( $args['title'] );
         $fields = $args['fields'];
+        $close_btn = ( isset( $args['close_btn'] ) ? sanitize_text_field( $args['close_btn'] ) : __( 'Close', 'ultimakit-for-wp' ) );
+        $save_btn = ( isset( $args['save_btn'] ) ? sanitize_text_field( $args['save_btn'] ) : __( 'Save changes', 'ultimakit-for-wp' ) );
         if ( !$this->ultimakit_asset_condition() ) {
             return;
         }
         ?>
 		<!-- Modal -->
 		<div class="wpuk_modal modal fade" id="<?php 
-        echo esc_attr( $this->ID );
+        echo esc_attr( $args['ID'] );
         ?>_modal" tabindex="-1" aria-labelledby="<?php 
         echo esc_attr( $this->ID );
         ?>_modal" aria-hidden="true">
@@ -127,12 +132,14 @@ class UltimaKit_Helpers {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php 
-        esc_html_e( 'Close', 'ultimakit-for-wp' );
+        echo esc_html( $close_btn );
         ?></button>
-						<button type="submit" class="btn btn-primary wpuk_save_module_settings" id="<?php 
+						<button type="submit" class="btn btn-primary wpuk_save_module_settings <?php 
+        echo esc_attr( $this->ID );
+        ?>_form" id="<?php 
         echo esc_attr( $this->ID );
         ?>_form"><?php 
-        esc_html_e( 'Save changes', 'ultimakit-for-wp' );
+        echo esc_html( $save_btn );
         ?></button>
 
 					</div>

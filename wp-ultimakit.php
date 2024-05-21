@@ -16,7 +16,7 @@
  * Plugin Name:       UltimaKit for WP
  * Plugin URI:        https://wpultimakit.com
  * Description:       <strong>UltimaKit for WP:</strong> The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Author:            UltimaKit For WP
  * Author URI:        https://wpultimakit.com/
  * License:           GPL-2.0+
@@ -33,7 +33,7 @@ if ( !defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'ULTIMAKIT_FOR_WP_VERSION', '1.0.1' );
+define( 'ULTIMAKIT_FOR_WP_VERSION', '1.1.0' );
 define( 'ULTIMAKIT_FOR_WP_LOGO', plugins_url( 'admin/img/wp-ultimakit-logo.svg', __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_DASHBOARD', 'wp-ultimakit-dashboard' );
@@ -43,7 +43,12 @@ if ( isset( $_GET['page'] ) && !empty( sanitize_text_field( wp_unslash( $_GET['p
 } else {
     define( 'ULTIMAKIT_FOR_WP_CURRENT_PAGE', '/' );
 }
-define( 'ULTIMAKIT_FOR_WP_ALLOWED_PAGES', apply_filters( 'ultimakit_pages_for_assets', array('wp-ultimakit-dashboard', 'wp-ultimakit-settings', 'wp-ultimakit-dashboard-account') ) );
+define( 'ULTIMAKIT_FOR_WP_ALLOWED_PAGES', apply_filters( 'ultimakit_pages_for_assets', array(
+    'wp-ultimakit-dashboard',
+    'wp-ultimakit-settings',
+    'wp-ultimakit-dashboard-account',
+    'wp-ultimakit-advanced-custom-js-and-css'
+) ) );
 if ( function_exists( 'ufw_fs' ) ) {
     ufw_fs()->set_basename( false, __FILE__ );
 } else {
@@ -154,7 +159,6 @@ if ( function_exists( 'ufw_fs' ) ) {
         10,
         6
     );
-    // $translated_text = 'Congratulations! Your premium version is now fully activated and ready to go.';
     /**
      * Begins execution of the plugin.
      *

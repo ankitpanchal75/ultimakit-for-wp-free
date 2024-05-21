@@ -215,7 +215,7 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 		if( is_array($_POST['module_settings']) ){
 			$module_settings = array_map(
 				function ( $value ) {
-					return sanitize_text_field( $value );
+					return sanitize_text_field( str_replace("\\", "", $value) );
 				},
 				$_POST['module_settings']
 			);
@@ -225,8 +225,16 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 
 		$save_mode       = sanitize_text_field( $_POST['save_mode'] );
 		$response        = array();
+		
 		if ( 'settings' == $save_mode ) {
-			$this->setModuleSettings( $module_id, $module_settings );
+			if( 1 === $module_settings['custom_option'] || true === $module_settings['custom_option'] ){
+				// For Custom JS and CSS Module
+				if( isset( $module_settings['css_js_snippets'] ) ) {
+					update_option($module_id, $module_settings['css_js_snippets'], 'no');
+				}
+			} else {
+				$this->setModuleSettings( $module_id, $module_settings );	
+			}
 			$response = array( 'message' => __( 'Module Settings Saved Successfully', 'ultimakit-for-wp' ) );
 		} elseif ( 'on' === $module_status ) {
 			$this->setModuleStatus( $module_id, $module_status );
