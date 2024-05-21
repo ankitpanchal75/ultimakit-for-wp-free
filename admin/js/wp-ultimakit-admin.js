@@ -36,7 +36,118 @@
 	 */
 
 	jQuery( document ).ready(
-		function ($) {
+		function ($) {	
+
+			// Export settings
+		    $('#ultimakit_export_settings').on('click', function(e) {
+		        e.preventDefault();
+
+		      	$.ajax({
+				    url: ultimakit_ajax.url,
+				    type: 'POST',
+				    data: {
+				        action: 'export_ultimakit_settings',
+				    },
+				    success: function (response) {
+				        window.location.href = ultimakit_ajax.url + '?action=export_ultimakit_settings&nonce=' + ultimakit_ajax.nonce;
+				    },
+				    error: function () {
+				        toastr.error('Error: AJAX request failed');
+				    },
+				});
+		    });
+
+		    // Import settings
+		    $('#ultimakit_import_settings').on('change', function(e) {
+		        e.preventDefault();
+
+		        var file_data = $('#ultimakit_import_settings').prop('files')[0];
+		        var form_data = new FormData();
+		        form_data.append('json_file', file_data);
+		        form_data.append('action', 'import_ultimakit_settings'); // WordPress AJAX action
+		        form_data.append('nonce', ultimakit_ajax.nonce); // Security nonce
+
+		        const toastConf = {
+					timeOut: 1500, // Adjust display time as needed (in milliseconds).
+					positionClass: 'toast-top-right', // Adjust position as needed.
+					progressBar: true, // Show a progress bar.
+					closeButton: true,
+					preventDuplicates: true,
+					iconClasses: {
+						success: "toast-success",
+				        warning: "toast-warning" // Specify a single CSS class for warning messages.
+				    },
+				};
+
+		        $.ajax({
+		            url: ultimakit_ajax.url, // WordPress admin AJAX URL
+		            type: 'POST',
+		            contentType: false,
+		            processData: false,
+		            data: form_data,
+		            success: function (response) {
+		            	toastr.success( 'Settings have been imported successfully.', '', toastConf );
+
+		            	setTimeout(function(){
+		            		window.location.reload();
+		            	},1000);
+		            },
+		            error: function (response) {
+		                toastr.error( 'Failed to import settings.', '', toastConf );
+		            }
+		        });
+
+		    });
+
+
+			let settingsActions = $( '.ultimakit_settings_action' );
+			settingsActions.on(
+				'change',
+				function (event) {
+					const restUrl   = ultimakit_ajax.url;
+					const toastConf = {
+						timeOut: 1500, // Adjust display time as needed (in milliseconds).
+						positionClass: 'toast-top-right', // Adjust position as needed.
+						progressBar: true, // Show a progress bar.
+						closeButton: true,
+						preventDuplicates: true,
+						iconClasses: {
+							success: "toast-success",
+					        warning: "toast-warning" // Specify a single CSS class for warning messages.
+					    },
+					};
+
+					// The event object contains information about the change event.
+					if (event.target.checked) {
+						status = 'on';
+					} else {
+						status = 'off';
+					}
+
+					// Make a REST API request.
+					$.ajax(
+					{
+						url: restUrl, // Use your endpoint route.
+						type: 'POST',
+						data: {
+							action: 'ultimakit_uninstall_settings',
+							stat: status,
+							nonce: ultimakit_ajax.nonce,
+						},
+						beforeSend: function (xhr) {
+							xhr.setRequestHeader( 'X-WP-Nonce', ultimakit_ajax.nonce ); // Include the nonce in the request header.
+						},
+						success: function (response) {
+							toastr.success( 'Settings Updated', '', toastConf );
+						},
+						error: function () {
+							// Handle errors.
+							toastr.error( 'Error: AJAX request failed', '', toastConf );
+						},
+					});
+				}
+			);
+
 			// Select the checkbox element by its ID.
 			let checkbox = $( '.ultimakit_module_action' );
 			// Add a change event listener to the checkbox.
@@ -62,7 +173,7 @@
 						preventDuplicates: true,
 						iconClasses: {
 							success: "toast-success",
-					        warning: "toast-warning" // Specify a single CSS class for warning messages.
+					        warning: "toast-warning" 
 					    },
 					};
 					// Make a REST API request.
@@ -88,7 +199,7 @@
 										jQuery( '.' + module_id ).hide();
 									}
 								} else {
-									toastr.success( 'Success: ' + response.data.message, '', toastConf );
+									toastr.error( response.data.message, '', toastConf );
 								}
 							},
 							error: function () {
@@ -152,7 +263,6 @@
 								xhr.setRequestHeader( 'X-WP-Nonce', ultimakit_ajax.nonce ); // Include the nonce in the request header.
 							},
 							success: function (response) {
-								console.log(response);
 								if (response.success) {
 									toastr.success( response.data.message, '', toastConf );
 									setTimeout(

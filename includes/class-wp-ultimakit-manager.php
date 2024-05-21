@@ -17,6 +17,10 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 	public function __construct() {
 		$this->ultimakit_initializeModules();
 		add_action( 'wp_ajax_ultimakit_update_settings', array( $this, 'ultimakit_update_settings' ) );
+		add_action( 'wp_ajax_ultimakit_uninstall_settings', array( $this, 'ultimakit_uninstall_settings' ) );
+		// Register AJAX actions for logged-in users
+		add_action('wp_ajax_export_ultimakit_settings', array( $this, 'export_settings_to_json') );
+		add_action('wp_ajax_import_ultimakit_settings', array( $this, 'import_settings_from_json') );
 	}
 
 	public function ultimakit_initializeModules() {
@@ -196,6 +200,10 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 
 	public function ultimakit_update_settings() {
 
+		if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
 		// Verify the nonce
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ultimakit_nonce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'ultimakit-for-wp' ) ), 401 );
@@ -232,4 +240,98 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 		}
 		wp_send_json_success( $response );
 	}
+
+
+	public function ultimakit_uninstall_settings(){
+
+		if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
+		// Verify the nonce
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ultimakit_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'ultimakit-for-wp' ) ), 401 );
+		}
+
+		$stat = sanitize_text_field( $_POST['stat'] );
+		
+		update_option( 'ultimakit_uninstall_settings', $stat, 'no' );
+
+		wp_send_json_success( $stat );
+	}
+
+
+	public function export_settings_to_json() {
+	    // Check for user capability
+	    if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
+	    // Option name to export
+	    $option_name = 'ultimakit_options'; // Change this to your actual option name
+	    $option_value = get_option($option_name);
+
+	   	if (!$option_value) {
+	        wp_die('Option not found');
+	    }
+
+	    $filename = date('Y-m-d_H-i-s').'-ultimakit_settings_export.json';
+
+	    // Set the headers to force a download
+	    header('Content-Type: application/json');
+	    header('Content-Disposition: attachment; filename="' . $filename . '"');
+	    header('Pragma: no-cache');
+	    header('Expires: 0');
+
+	    // Output the JSON-encoded data
+	    echo json_encode($option_value);
+	    exit;
+	}
+
+
+	public function import_settings_from_json(){
+
+		// Check for user capability
+	    if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
+	    // Verify the nonce
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ultimakit_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'ultimakit-for-wp' ) ), 401 );
+		}
+
+		// Handle the uploaded JSON file
+	    if (isset($_FILES['json_file']) && $_FILES['json_file']['error'] == 0) {
+	        $file = $_FILES['json_file'];
+
+	        // Make sure it's a JSON file
+	        if ($file['type'] != 'application/json') {
+	            wp_send_json_error('Invalid file type');
+	        }
+
+	        // Read file contents from the temporary location
+	        $file_contents = file_get_contents($file['tmp_name']);
+	        if ($file_contents === false) {
+	            wp_send_json_error('Failed to read file');
+	            return; // Exit the function after sending the error
+	        }
+
+	        $settings = json_decode($file_contents, true);
+
+	        if (json_last_error() !== JSON_ERROR_NONE) {
+	            wp_send_json_error('Invalid JSON: ' . json_last_error_msg());
+	            return; // Exit the function after sending the error
+	        }
+
+	        if (update_option('ultimakit_options', $settings)) {
+	            wp_send_json_success('Settings imported successfully');
+	        } else {
+	            wp_send_json_error('Failed to update settings');
+	        }
+	    }
+
+	    wp_send_json_error('No file uploaded');
+	}
+
 }

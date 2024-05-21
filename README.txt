@@ -1,15 +1,15 @@
 === The Essential WordPress Toolkit - UltimaKit For WP ===
 Contributors: ankitmaru, ankitpanchal
 Donate link: https://wpankit.com/
-Tags: customization, toolkit, admin enhancement
+Tags: optimizations, tools, enhancements, widgets, tweaks
 Requires at least: 5.6
 Tested up to: 6.5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simplify WordPress. Manage content, customize design, enhance security – one plugin.
+The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
 
 == Description ==
 
@@ -63,7 +63,8 @@ Simplify WordPress. Manage content, customize design, enhance security – one p
 11. [Media Trash](https://wpultimakit.com/enable-media-trash-in-wordpress/) - Activate the Trash feature for deleting media files.
 12. [Obfuscate Author Slugs](https://wpultimakit.com/obfuscate-author-slugs-in-wordpress/) - This feature hides the actual usernames of authors, improving security by making it more difficult for attackers to guess login details.
 13. [Post Type Switcher](https://wpultimakit.com/post-type-switcher-in-wordpress/) - Switch post type between available post types quickly and easily.
-14. [SMTP Email](https://wpultimakit.com/configure-smtp-in-wordpress/) - The SMTP email module improves the delivery of email.
+14. [Quick Admin Search](https://wpultimakit.com/quick-search-posts-and-terms-from-admin-panel-in-wordpress) - Effortlessly Navigate Through the Admin Panel
+15. [SMTP Email](https://wpultimakit.com/configure-smtp-in-wordpress/) - The SMTP email module improves the delivery of email.
 
 ### 🔥 WHAT’S NEXT
 Need a specific feature? We're building 30+ new modules. Submit your request and help shape the future of UltimaKit.
@@ -100,11 +101,16 @@ Yes, It works with most recent releases and past releases as well.
 2. screenshot-2.png
 3. screenshot-3.png
 4. screenshot-4.png
+5. screenshot-5.png
+6. screenshot-6.png
 
 == Changelog ==
 
 = 1.0.0 = - 07.05.2024 =
 First release, Included 36+ modules (Free/Pro)
+
+= 1.0.1 = - 12.05.2024 =
+Added settings page, A new module (Quick Admin Search) added in Pro version and other improvements.
 
 == Upgrade Notice ==
 

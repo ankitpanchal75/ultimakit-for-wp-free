@@ -174,11 +174,38 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
             // Capability (only admins can access).
             'wp-ultimakit-dashboard',
             // Menu Slug.
-            array($this, 'ultimakit_render_settings_page'),
+            array($this, 'ultimakit_render_dashboard_page'),
             // The function to render the page content.
             'dashicons-superhero',
             100
         );
+        // Add submenu page
+        add_submenu_page(
+            'wp-ultimakit-dashboard',
+            // Parent slug
+            __( 'Settings', 'ultimakit-for-wp' ),
+            // Page title
+            __( 'Settings', 'ultimakit-for-wp' ),
+            // Menu title
+            'manage_options',
+            // Capability
+            'wp-ultimakit-settings',
+            // Menu slug
+            array($this, 'ultimakit_render_settings_page')
+        );
+    }
+
+    public function ultimakit_render_settings_page() {
+        ?>
+		<div class="wrap">
+			<?php 
+        $this->ultimakit_get_header();
+        ?>
+			<?php 
+        $this->ultimakit_get_settings();
+        ?>
+		</div>
+		<?php 
     }
 
     /**
@@ -190,7 +217,7 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
      * settings form, and handles the submission of form data for updating plugin/theme
      * settings.
      */
-    public function ultimakit_render_settings_page() {
+    public function ultimakit_render_dashboard_page() {
         ?>
 		<div class="wrap">
 			<?php 
@@ -199,6 +226,51 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 			<?php 
         $this->ultimakit_get_modules();
         ?>
+		</div>
+		<?php 
+    }
+
+    public function ultimakit_get_settings() {
+        ?>
+		<div class="container-fluid module-container">
+			<div class="row">
+				<div class="col-6">
+					<form id="ultimakit_form" method="post" enctype="multipart/form-data">
+						<?php 
+        $uninstall_status = get_option( 'ultimakit_uninstall_settings', true );
+        ?>
+						<div class="mb-3 form-check form-switch p-0">
+							<label><?php 
+        echo esc_html_e( 'Remove all plugin data upon uninstallation.', 'ultimakit-for-wp' );
+        ?></label>
+						  <input class="form-check-input ultimakit_settings_action" type="checkbox" id="ultimakit_uninstall_settings" <?php 
+        if ( 'on' === $uninstall_status ) {
+            echo 'checked';
+        }
+        ?> >
+						  <label class="form-check-label switch-label" for="ultimakit_uninstall_settings">Toggle me</label>
+						</div>
+
+						<div class="mb-3">
+						  <label for="formFile" class="form-label"><?php 
+        echo esc_html_e( 'Import Settings', 'ultimakit-for-wp' );
+        ?></label>
+						  <input class="form-control" type="file" name="ultimakit_import_settings" id="ultimakit_import_settings" accept=".json">
+						  <small><?php 
+        echo esc_html_e( 'Only valid JSON is accepted.', 'ultimakit-for-wp' );
+        ?></small>
+						</div>
+
+						<div class="mb-5">
+						  <button class="btn btn-primary" id="ultimakit_export_settings"><?php 
+        echo esc_html_e( 'Export Settings', 'ultimakit-for-wp' );
+        ?></button>
+						</div>
+					
+					</form>	
+
+				</div>
+			</div>
 		</div>
 		<?php 
     }

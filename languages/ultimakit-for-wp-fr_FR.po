@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: UltimaKit for WP\n"
-"POT-Creation-Date: 2024-05-04 14:25+0530\n"
-"PO-Revision-Date: 2024-05-04 14:28+0530\n"
+"POT-Creation-Date: 2024-05-07 23:58+0530\n"
+"PO-Revision-Date: 2024-05-07 23:58+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -25,6 +25,7 @@ msgstr ""
 msgid "UltimaKit Dashboard"
 msgstr "Tableau de bord UltimaKit"
 
+#. Author of the plugin/theme
 #: admin/class-wp-ultimakit-admin.php:144
 #, fuzzy
 msgid "UltimaKit For WP"
@@ -252,27 +253,6 @@ msgstr ""
 msgid "Sorry, that username is not allowed."
 msgstr "Ce nom d’utilisateur n’est pas autorisé."
 
-#: modules/block-admin-username/class-wpultimakit-module-block-admin-username.php:120
-msgid ""
-"detected username as admin. We recommend changing username for security "
-"purposes."
-msgstr ""
-"le nom d'utilisateur détecté est admin. Nous recommandons de changer de nom "
-"d'utilisateur pour des raisons de sécurité."
-
-#: modules/block-admin-username/class-wpultimakit-module-block-admin-username.php:121
-#, fuzzy
-msgid "Ultimakit For WP"
-msgstr "Ultimakit pour WP"
-
-#: modules/block-admin-username/class-wpultimakit-module-block-admin-username.php:121
-msgid "Enter new username"
-msgstr "Entrez un nouveau nom d'utilisateur"
-
-#: modules/block-admin-username/class-wpultimakit-module-block-admin-username.php:121
-msgid "Change"
-msgstr "Changer"
-
 #: modules/block-admin-username/class-wpultimakit-module-block-admin-username.php:146
 msgid "Invalid nonce!"
 msgstr "Non valide nonce !"
@@ -326,7 +306,7 @@ msgid "Biographical Info"
 msgstr "Biographie"
 
 #: modules/clean-user-profiles/class-wpultimakit-module-clean-user-profiles.php:147
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:192
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:191
 msgid "Role"
 msgstr "Rôle"
 
@@ -495,11 +475,6 @@ msgid "Disable the entire comment feature from WordPress if not utilised."
 msgstr ""
 "Désactivez l’ensemble de la fonction de commentaire de WordPress si elle "
 "n’est pas utilisée."
-
-#: modules/disable-comments/class-wpultimakit-module-disable-comments.php:173
-#, fuzzy
-msgid "Sorry, Comments are disabled."
-msgstr "Désolé, les commentaires sont désactivés."
 
 #: modules/disable-dashboard-widgets/class-wpultimakit-module-disable-dashboard-widgets.php:97
 #: modules/disable-dashboard-widgets/class-wpultimakit-module-disable-dashboard-widgets.php:184
@@ -734,32 +709,31 @@ msgstr "Arrêtez d’ennuyer les avis d’administration."
 msgid "Hide Admin Notices - Settings"
 msgstr "Masquer les avis d’administration - Paramètres"
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:188
-#: modules/module-template/class-wpultimakit-module-module-template.php:134
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:187
 #: modules/smtp-email/class-wpultimakit-module-smtp-email.php:148
 msgid "From Name"
 msgstr "Nom de l'expéditeur"
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:190
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:189
 #, fuzzy
 msgid "Turn on the toggle to hide admin notices based on user roles."
 msgstr ""
 "Activez le bouton pour masquer les notifications d’administrateur en "
 "fonction des rôles d’utilisateur."
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:193
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:192
 msgid "Plugin"
 msgstr "Extension"
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:194
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:193
 msgid "Theme"
 msgstr "Thème"
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:195
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:194
 msgid "Core"
 msgstr "Noyau"
 
-#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:196
+#: modules/hide-admin-notices-advanced/class-wpultimakit-module-hide-admin-notices-advanced.php:195
 msgid "All"
 msgstr "Tout"
 
@@ -870,7 +844,7 @@ msgstr "Paramètres du mode de Maintenance"
 
 #: modules/maintenance-mode/class-wpultimakit-module-maintenance-mode.php:140
 #, fuzzy
-msgid "Activate maintencance mode"
+msgid "Activate maintenance mode"
 msgstr "Activer le mode de maintenance"
 
 #: modules/maintenance-mode/class-wpultimakit-module-maintenance-mode.php:145
@@ -919,17 +893,6 @@ msgstr "Corbeille multimédia"
 #, fuzzy
 msgid "Activate the Trash feature for deleting media files."
 msgstr "Activez la fonction Corbeille pour supprimer les fichiers multimédias."
-
-#: modules/module-template/class-wpultimakit-module-module-template.php:87
-#: modules/module-template/class-wpultimakit-module-module-template.php:88
-#, fuzzy
-msgid "Template Module"
-msgstr "Module de modèle"
-
-#: modules/module-template/class-wpultimakit-module-module-template.php:129
-#: modules/smtp-email/class-wpultimakit-module-smtp-email.php:143
-msgid "SMTP Settings"
-msgstr "Paramétrage SMTP"
 
 #: modules/nav-menu-visibility/class-wpultimakit-module-nav-menu-visibility.php:85
 #, fuzzy
@@ -1129,6 +1092,10 @@ msgstr "SMTP Email"
 msgid "The SMTP email module improves the delivery of email."
 msgstr "Le module de messagerie SMTP améliore la livraison des e-mails."
 
+#: modules/smtp-email/class-wpultimakit-module-smtp-email.php:143
+msgid "SMTP Settings"
+msgstr "Paramétrage SMTP"
+
 #: modules/smtp-email/class-wpultimakit-module-smtp-email.php:153
 msgid "SMTP Host"
 msgstr "SMTP Host"
@@ -1268,12 +1235,12 @@ msgstr ""
 msgid "Set width to (default 160px)"
 msgstr "Définissez la largeur sur (160px par défaut)"
 
-#: wp-ultimakit.php:144
+#: wp-ultimakit.php:143
 #, php-format
 msgid "Hey %1$s"
 msgstr "Bonjour %1$s"
 
-#: wp-ultimakit.php:145
+#: wp-ultimakit.php:144
 #, php-format
 msgid ""
 "Please help us improve %2$s! If you opt-in, some data about your usage of "
@@ -1295,20 +1262,54 @@ msgid "https://wpultimakit.com"
 msgstr "https://wpultimakit.com"
 
 #. Description of the plugin/theme
-#, fuzzy
 msgid ""
-"WP UltimaKit: Power up your WordPress site with modular SEO & UX "
-"enhancements!"
+"<strong>UltimaKit for WP:</strong> The WordPress Toolkit Built With You in "
+"Mind. Essential features, ongoing development – shape the future of your "
+"WordPress experience."
 msgstr ""
-"WP UltimaKit : Dynamisez votre site WordPress avec des améliorations "
-"modulaires en matière de référencement et d’expérience utilisateur !"
-
-#. Author of the plugin/theme
-#, fuzzy
-msgid "Ankit Panchal"
-msgstr "Ankit Panchal"
 
 #. Author URI of the plugin/theme
 #, fuzzy
-msgid "https://wpankit.com/"
-msgstr "https://wpankit.com/"
+msgid "https://wpultimakit.com/"
+msgstr "https://wpultimakit.com"
+
+#~ msgid ""
+#~ "detected username as admin. We recommend changing username for security "
+#~ "purposes."
+#~ msgstr ""
+#~ "le nom d'utilisateur détecté est admin. Nous recommandons de changer de "
+#~ "nom d'utilisateur pour des raisons de sécurité."
+
+#, fuzzy
+#~ msgid "Ultimakit For WP"
+#~ msgstr "Ultimakit pour WP"
+
+#~ msgid "Enter new username"
+#~ msgstr "Entrez un nouveau nom d'utilisateur"
+
+#~ msgid "Change"
+#~ msgstr "Changer"
+
+#, fuzzy
+#~ msgid "Sorry, Comments are disabled."
+#~ msgstr "Désolé, les commentaires sont désactivés."
+
+#, fuzzy
+#~ msgid "Template Module"
+#~ msgstr "Module de modèle"
+
+#, fuzzy
+#~ msgid ""
+#~ "WP UltimaKit: Power up your WordPress site with modular SEO & UX "
+#~ "enhancements!"
+#~ msgstr ""
+#~ "WP UltimaKit : Dynamisez votre site WordPress avec des améliorations "
+#~ "modulaires en matière de référencement et d’expérience utilisateur !"
+
+#, fuzzy
+#~ msgid "Ankit Panchal"
+#~ msgstr "Ankit Panchal"
+
+#, fuzzy
+#~ msgid "https://wpankit.com/"
+#~ msgstr "https://wpankit.com/"

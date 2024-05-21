@@ -8,7 +8,7 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @package UltimaKit_
+ * @package UltimaKit
  * @link    https://wpankit.com
  * @since   1.0.0
  *
@@ -16,7 +16,7 @@
  * Plugin Name:       UltimaKit for WP
  * Plugin URI:        https://wpultimakit.com
  * Description:       <strong>UltimaKit for WP:</strong> The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            UltimaKit For WP
  * Author URI:        https://wpultimakit.com/
  * License:           GPL-2.0+
@@ -33,7 +33,7 @@ if ( !defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'ULTIMAKIT_FOR_WP_VERSION', '1.0.0' );
+define( 'ULTIMAKIT_FOR_WP_VERSION', '1.0.1' );
 define( 'ULTIMAKIT_FOR_WP_LOGO', plugins_url( 'admin/img/wp-ultimakit-logo.svg', __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_DASHBOARD', 'wp-ultimakit-dashboard' );
@@ -43,7 +43,7 @@ if ( isset( $_GET['page'] ) && !empty( sanitize_text_field( wp_unslash( $_GET['p
 } else {
     define( 'ULTIMAKIT_FOR_WP_CURRENT_PAGE', '/' );
 }
-define( 'ULTIMAKIT_FOR_WP_ALLOWED_PAGES', apply_filters( 'ultimakit_pages_for_assets', array('wp-ultimakit-dashboard', 'wp-ultimakit-dashboard-account') ) );
+define( 'ULTIMAKIT_FOR_WP_ALLOWED_PAGES', apply_filters( 'ultimakit_pages_for_assets', array('wp-ultimakit-dashboard', 'wp-ultimakit-settings', 'wp-ultimakit-dashboard-account') ) );
 if ( function_exists( 'ufw_fs' ) ) {
     ufw_fs()->set_basename( false, __FILE__ );
 } else {
@@ -114,6 +114,20 @@ if ( function_exists( 'ufw_fs' ) ) {
     require plugin_dir_path( __FILE__ ) . 'includes/class-wp-ultimakit-helpers.php';
     require plugin_dir_path( __FILE__ ) . 'includes/class-wp-ultimakit-manager.php';
     function ufw_fs_uninstall_cleanup() {
+        $option_name = 'ultimakit_options';
+        // Delete options
+        delete_option( $option_name );
+        delete_option( 'ultimakit_uninstall_settings' );
+        // For Multisite, iterate over all blogs and delete options
+        if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+            global $wpdb;
+            $blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
+            foreach ( $blog_ids as $blog_id ) {
+                switch_to_blog( $blog_id );
+                delete_option( $option_name );
+                restore_current_blog();
+            }
+        }
     }
 
     function ufw_fs_custom_connect_message_on_update(

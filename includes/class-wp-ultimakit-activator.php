@@ -43,7 +43,8 @@ class UltimaKit_Activator {
 			}
 
 			// Options array doesn't exist, so insert the default settings
-			update_option( 'ultimakit_options', $default_module_options );
+			update_option( 'ultimakit_options', $default_module_options, 'no' );
+			update_option( 'ultimakit_uninstall_settings', 'off', 'no' );
 		}
 	}
 }
