@@ -163,5 +163,27 @@
         "link": "setup-smtp-in-wordpress",
         "is_active": false,
         "settings": "yes"
+    },
+    {
+        "id": "ultimakit_module_front_end_login_form",
+        "name": "Front-end Login Form",
+        "description": "Adds a basic front-end login for to any page, post or widget.",
+        "category": "User",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "setup-front-end-login-form-in-wordpress",
+        "is_active": false,
+        "settings": "yes"
+    },
+    {
+        "id": "ultimakit_module_utm_builder",
+        "name": "UTM Builder",
+        "description": "Generate UTM tracking URLs easily.",
+        "category": "Utilities",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "utm-builder-in-wordpress",
+        "is_active": false,
+        "settings": "yes"
     }
 ]

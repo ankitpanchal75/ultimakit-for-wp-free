@@ -1,23 +1,21 @@
 <?php
 /**
- * Class UltimaKit_Module_Clean_User_Profiles
+ * Class UltimaKit_Module_Redirect_After_Login
  *
  * @since 1.0.0
  * @package    UltimaKit
  */
 
 /**
- * Class UltimaKit_Module_Clean_User_Profiles
+ * Class UltimaKit_Module_Redirect_After_Login
  *
  * @since 1.0.0
  */
-class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
+class UltimaKit_Module_Redirect_After_Login extends UltimaKit_Module_Manager {
 	/**
-	 * Unique identifier for the Hide Admin Bar module.
-	 *
 	 * @var string
 	 */
-	protected $ID = 'ultimakit_clean_user_profiles';
+	protected $ID = 'ultimakit_module_redirect_after_login';
 
 	/**
 	 * The name of the module.
@@ -66,7 +64,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 *
 	 * @var string
 	 */
-	protected $read_more_link = 'clean-user-profiles-in-wordpress';
+	protected $read_more_link = 'redirect-after-login-in-wordpress';
 
 	/**
 	 * The settings associated with the module, if any.
@@ -76,6 +74,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	protected $settings;
 
 	/**
+	 * Constructs the Hide Admin Bar module instance.
 	 *
 	 * Initializes the module with default values for properties and prepares
 	 * any necessary setup or hooks into WordPress. This may include setting
@@ -83,8 +82,8 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 * the module to function properly within WordPress.
 	 */
 	public function __construct() {
-		$this->name        = __( 'Clean User Profiles', 'ultimakit-for-wp' );
-		$this->description = __( 'Clean up user profiles by removing unused sections.', 'ultimakit-for-wp' );
+		$this->name        = __( 'Redirect After Login', 'ultimakit-for-wp' );
+		$this->description = __( 'Redirect users to specific pages upon logging in, enhancing user experience and engagement', 'ultimakit-for-wp' );
 		$this->is_active   = $this->isModuleActive( $this->ID );
 		$this->settings    = 'yes';
 		$this->initializeModule();
@@ -107,6 +106,8 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 		if ( $this->is_active ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'add_scripts' ) );
 			add_action( 'admin_footer', array( $this, 'add_modal' ) );
+
+			add_filter( 'wp_login', array( $this, 'redirect_after_login' ), 5, 2 );
 		}
 	}
 
@@ -124,49 +125,32 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	public function add_modal() {
 		$arguments          = array();
 		$arguments['ID']    = $this->ID;
-		$arguments['title'] = __( 'Clean User Profiles (Hide sections)', 'ultimakit-for-wp' );
+		$arguments['title'] = __( 'Redirect After Login', 'ultimakit-for-wp' );
+
+		$user_roles = $this->get_all_user_roles();
 
 		$arguments['fields'] = array(
-			'user-admin-color-wrap'          => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Admin Color Scheme', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-admin-color-wrap' ),
+			'redirect_after_login' => array(
+				'type'  => 'text',
+				'desc' => __('Base URL:').get_home_url(),
+				'label' => __( 'URL Slug', 'ultimakit-for-wp' ),
+				'value' => $this->getModuleSettings( $this->ID, 'redirect_after_login' ),
 			),
-			'user-admin-bar-front-wrap'        => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Toolbar', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-admin-bar-front-wrap' ),
+			'user_roles_list' => array(
+				'type'  => 'select2',
+				'label' => __( 'User Roles', 'ultimakit-for-wp' ),
+				'options' => $user_roles,
+				'default' => '',
 			),
-			'user-description-wrap'  => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Biographical Info', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-description-wrap' ),
-			),
-			'user-role-wrap' => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Role', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-role-wrap' ),
-			),
-			'user-email-wrap'      => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Email', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-email-wrap' ),
-			),
-			'user-pass1-wrap'                 => array(
-				'type'  => 'checkbox',
-				'label' => __( 'New Password', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-pass1-wrap' ),
-			),
-			'user-generate-reset-link-wrap'                 => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Reset Password', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-generate-reset-link-wrap' ),
+			'user_roles_list_val' => array(
+				'type'  => 'hidden',
+				'value' => $this->getModuleSettings( $this->ID, 'user_roles_list_val' )
 			),
 		);
 
 		$this->ultimakit_generate_modal( $arguments );
 	}
-
+	
 	/**
 	 * Enqueues scripts for the theme or plugin.
 	 *
@@ -182,6 +166,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 * @return void
 	 */
 	public function add_scripts() {
+
 		wp_enqueue_script(
 			'ultimakit-module-script-' . $this->ID,
 			plugins_url( '/module-script.js', __FILE__ ),
@@ -190,43 +175,61 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 			true
 		);
 
-		$hide_sections = array();
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-admin-color-wrap' ) ) {
-			array_push( $hide_sections, 'user-admin-color-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-admin-bar-front-wrap' ) ) {
-			array_push( $hide_sections, 'user-admin-bar-front-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-description-wrap' ) ) {
-			array_push( $hide_sections, 'user-description-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-role-wrap' ) ) {
-			array_push( $hide_sections, 'user-role-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-email-wrap' ) ) {
-			array_push( $hide_sections, 'user-email-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-pass1-wrap' ) ) {
-			array_push( $hide_sections, 'user-pass1-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-generate-reset-link-wrap' ) ) {
-			array_push( $hide_sections, 'user-generate-reset-link-wrap' );
-		}
-
-
 		wp_localize_script(
 			'ultimakit-module-script-' . $this->ID,
-			'ultimakit_clean_user_profiles',
-			array('sections' => json_encode($hide_sections) )
+			'ultimakit_redirect_after_login',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce' => wp_create_nonce( 'ultimakit-smtp-email' ),
+				'selected_roles' => $this->getModuleSettings( $this->ID, 'user_roles_list_val' )
+			)
 		);
 	}
-
 	
+	public function redirect_after_login( $username, $user ) {
+
+        $redirect_slug = $this->getModuleSettings($this->ID, 'redirect_after_login');
+		$redirect_slug_raw = isset($redirect_slug) ? $redirect_slug : '';
+
+		if (!empty($redirect_slug_raw)) {
+		    $redirect_slug_trimmed = trim(trim($redirect_slug_raw), '/');
+		    if (false !== strpos($redirect_slug_trimmed, '.php')) {
+		        $slug_suffix = '';
+		    } else {
+		        $slug_suffix = '/';
+		    }
+		    $relative_url_path = $redirect_slug_trimmed . $slug_suffix;
+		} else {
+		    $relative_url_path = '';
+		}
+
+		$user_roles_list = explode(",", $this->getModuleSettings($this->ID, 'user_roles_list_val'));
+
+		if (isset($user_roles_list) && (count($user_roles_list) > 0)) {
+
+		    // Assemble single-dimensional array of roles for which custom URL redirection should happen
+		    $roles_for_redirect = array();
+
+		    foreach ($user_roles_list as $role_for_redirect) {
+		        if ($role_for_redirect) {
+		            $roles_for_redirect[] = $role_for_redirect;
+		        }
+		    }
+
+		    // Does the user have roles data in array form?
+		    if (isset($user->roles) && is_array($user->roles)) {
+		        $current_user_roles = $user->roles;
+		    }
+
+		    // Set custom redirect URL for roles set in the settings. Otherwise, leave redirect URL to the default, i.e. admin dashboard.
+		    foreach ($current_user_roles as $role) {
+		        if (in_array($role, $roles_for_redirect)) {
+		            wp_safe_redirect(home_url($relative_url_path));
+		            exit();
+		        }
+		    }
+		}
+
+
+    }
 }

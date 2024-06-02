@@ -1,23 +1,21 @@
 <?php
 /**
- * Class UltimaKit_Module_Clean_User_Profiles
+ * Class UltimaKit_Module_Change_Admin_Email
  *
  * @since 1.0.0
  * @package    UltimaKit
  */
 
 /**
- * Class UltimaKit_Module_Clean_User_Profiles
+ * Class UltimaKit_Module_Change_Admin_Email
  *
  * @since 1.0.0
  */
-class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
+class UltimaKit_Module_Change_Admin_Email extends UltimaKit_Module_Manager {
 	/**
-	 * Unique identifier for the Hide Admin Bar module.
-	 *
 	 * @var string
 	 */
-	protected $ID = 'ultimakit_clean_user_profiles';
+	protected $ID = 'ultimakit_module_change_admin_email';
 
 	/**
 	 * The name of the module.
@@ -45,7 +43,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 *
 	 * @var string
 	 */
-	protected $category = 'User';
+	protected $category = 'Admin';
 
 	/**
 	 * The type of module, indicating its platform or use case.
@@ -66,7 +64,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 *
 	 * @var string
 	 */
-	protected $read_more_link = 'clean-user-profiles-in-wordpress';
+	protected $read_more_link = 'change-admin-email-in-wordpress-without-email-verification';
 
 	/**
 	 * The settings associated with the module, if any.
@@ -83,8 +81,8 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 * the module to function properly within WordPress.
 	 */
 	public function __construct() {
-		$this->name        = __( 'Clean User Profiles', 'ultimakit-for-wp' );
-		$this->description = __( 'Clean up user profiles by removing unused sections.', 'ultimakit-for-wp' );
+		$this->name        = __( 'Change Admin Email', 'ultimakit-for-wp' );
+		$this->description = __( 'Change Admin Email Without Verification', 'ultimakit-for-wp' );
 		$this->is_active   = $this->isModuleActive( $this->ID );
 		$this->settings    = 'yes';
 		$this->initializeModule();
@@ -107,6 +105,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 		if ( $this->is_active ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'add_scripts' ) );
 			add_action( 'admin_footer', array( $this, 'add_modal' ) );
+			add_action( 'wp_ajax_ultimakit_update_admin_email', array( $this, 'ultimakit_update_admin_email' ) );
 		}
 	}
 
@@ -124,49 +123,20 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	public function add_modal() {
 		$arguments          = array();
 		$arguments['ID']    = $this->ID;
-		$arguments['title'] = __( 'Clean User Profiles (Hide sections)', 'ultimakit-for-wp' );
+		$arguments['title'] = __( 'Admin Email Settings', 'ultimakit-for-wp' );
 
 		$arguments['fields'] = array(
-			'user-admin-color-wrap'          => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Admin Color Scheme', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-admin-color-wrap' ),
-			),
-			'user-admin-bar-front-wrap'        => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Toolbar', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-admin-bar-front-wrap' ),
-			),
-			'user-description-wrap'  => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Biographical Info', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-description-wrap' ),
-			),
-			'user-role-wrap' => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Role', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-role-wrap' ),
-			),
-			'user-email-wrap'      => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Email', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-email-wrap' ),
-			),
-			'user-pass1-wrap'                 => array(
-				'type'  => 'checkbox',
-				'label' => __( 'New Password', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-pass1-wrap' ),
-			),
-			'user-generate-reset-link-wrap'                 => array(
-				'type'  => 'checkbox',
-				'label' => __( 'Reset Password', 'ultimakit-for-wp' ),
-				'value' => $this->getModuleSettings( $this->ID, 'user-generate-reset-link-wrap' ),
+			'admin_email'          => array(
+				'type'  => 'text',
+				'label' => __( 'Admin Email Address', 'ultimakit-for-wp' ),
+				'value' => (!empty(get_option('new_admin_email', ''))) ? get_option('new_admin_email', '') : get_option('admin_email', ''),
+				'desc' => __( 'Please enter valid email address.', 'ultimakit-for-wp' ),
 			),
 		);
 
 		$this->ultimakit_generate_modal( $arguments );
 	}
-
+	
 	/**
 	 * Enqueues scripts for the theme or plugin.
 	 *
@@ -182,6 +152,7 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 	 * @return void
 	 */
 	public function add_scripts() {
+
 		wp_enqueue_script(
 			'ultimakit-module-script-' . $this->ID,
 			plugins_url( '/module-script.js', __FILE__ ),
@@ -190,43 +161,41 @@ class UltimaKit_Module_Clean_User_Profiles extends UltimaKit_Module_Manager {
 			true
 		);
 
-		$hide_sections = array();
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-admin-color-wrap' ) ) {
-			array_push( $hide_sections, 'user-admin-color-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-admin-bar-front-wrap' ) ) {
-			array_push( $hide_sections, 'user-admin-bar-front-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-description-wrap' ) ) {
-			array_push( $hide_sections, 'user-description-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-role-wrap' ) ) {
-			array_push( $hide_sections, 'user-role-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-email-wrap' ) ) {
-			array_push( $hide_sections, 'user-email-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-pass1-wrap' ) ) {
-			array_push( $hide_sections, 'user-pass1-wrap' );
-		}
-
-		if ( 'on' === $this->getModuleSettings( $this->ID, 'user-generate-reset-link-wrap' ) ) {
-			array_push( $hide_sections, 'user-generate-reset-link-wrap' );
-		}
-
-
 		wp_localize_script(
 			'ultimakit-module-script-' . $this->ID,
-			'ultimakit_clean_user_profiles',
-			array('sections' => json_encode($hide_sections) )
+			'ultimakit_change_admin_email',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce' => wp_create_nonce( 'ultimakit-change-email' ),
+			)
 		);
 	}
 
+	public function ultimakit_update_admin_email() {
+
+		if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
+	    // Verify the nonce
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ultimakit-change-email' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'ultimakit-for-wp' ) ), 401 );
+		}
+
+		$email = isset($_POST['admin_email']) ? sanitize_email($_POST['admin_email']) : '';
+
+		if( empty($email)) {
+			wp_send_json_error('Please enter valid email address.' );
+		}
+
+	    if (is_email($email)) {
+	        update_option('admin_email', $email);
+	        delete_option('new_admin_email');
+	        wp_send_json_success(__('Admin email address updated successfully!', 'ultimakit-for-wp'));
+	    } else {
+	    	 wp_send_json_error( __('Please enter valid email address.', 'ultimakit-for-wp') );
+	    }
+
+	}
 	
 }

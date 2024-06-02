@@ -17,7 +17,7 @@
  *
  * @package    UltimaKit
  * @subpackage UltimaKit/admin
- * @author     Ankit Panchal <ankitpanchalweb7@gmail.com>
+ * @author     Ankit Panchal <developer@wpultimakit.com>
  */
 class UltimaKit_Admin extends UltimaKit_Module_Manager {
     /**
@@ -68,6 +68,13 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
          * class.
          */
         if ( strpos( ULTIMAKIT_FOR_WP_CURRENT_PAGE, 'ultimakit' ) > 0 ) {
+            wp_enqueue_style(
+                'select2-css',
+                plugin_dir_url( __FILE__ ) . 'css/select2.min.css',
+                array(),
+                $this->version,
+                'all'
+            );
             wp_enqueue_style(
                 'ultimakit_bootstrap_main',
                 plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css',
@@ -130,6 +137,13 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
             wp_enqueue_script(
                 'toastr-js',
                 plugin_dir_url( __FILE__ ) . 'js/toastr.min.js',
+                array('jquery'),
+                $this->version,
+                true
+            );
+            wp_enqueue_script(
+                'select2-js',
+                plugin_dir_url( __FILE__ ) . 'js/select2.min.js',
                 array('jquery'),
                 $this->version,
                 true
@@ -323,6 +337,25 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
         ?></option>
 						            </select>
 						        </div>
+						        <div style="margin-right: 10px;">
+						            <label for="search" style="margin-right: 5px;"><?php 
+        echo esc_html_e( 'Search:', 'ultimakit-for-wp' );
+        ?></label>
+						            <input type="text" id="ultimakit_search_module" placeholder="<?php 
+        echo esc_html_e( 'Search module', 'ultimakit-for-wp' );
+        ?>">
+						        </div>
+						        <div style="margin-right: 10px;" class="ultimakit_view_mode">
+						            <label for="view" style="margin-right: 5px;"><?php 
+        echo esc_html_e( 'View:', 'ultimakit-for-wp' );
+        ?></label>
+						            <a href="javascript:void(0);" id="ultimakit_full_screen">
+							            <span class="dashicons dashicons-editor-contract"></span>
+							        </a>
+							        <a href="javascript:void(0);" id="ultimakit_small_screen">
+							            <span class="dashicons dashicons-editor-expand"></span>
+							        </a>
+						        </div>
 						    </form>
 						</div>
 
@@ -330,12 +363,12 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" id="wpukTabs" role="tablist">
 						<li class="nav-item" role="presentation">
-							<a class="nav-link active" id="modules-tab" data-bs-toggle="tab" href="#free-modules" role="tab" aria-controls="free-modules" aria-selected="true"><?php 
+							<a class="nav-link active" id="free-modules-tab" data-bs-toggle="tab" href="#free-modules" role="tab" aria-controls="free-modules" aria-selected="true"><?php 
         echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
         ?></a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link " id="modules-tab" data-bs-toggle="tab" href="#pro-modules" role="tab" aria-controls="pro-modules" aria-selected="true"><?php 
+							<a class="nav-link " id="pro-modules-tab" data-bs-toggle="tab" href="#pro-modules" role="tab" aria-controls="pro-modules" aria-selected="true"><?php 
         echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
         ?></a>
 						</li>
@@ -344,7 +377,6 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
         echo esc_html_e( 'Help', 'ultimakit-for-wp' );
         ?></a>
 						</li>
-						
 					</ul>
 
 					<!-- Tab panes -->
@@ -381,7 +413,9 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
                 ?></p>
 
 													<div class="form-check form-switch module-switch">
-														<input type="checkbox" class="form-check-input ultimakit_module_action" id="<?php 
+														<input type="checkbox" class="form-check-input ultimakit_module_action" module-name="<?php 
+                echo esc_attr( $module['name'] );
+                ?>" id="<?php 
                 echo esc_attr( $module['id'] );
                 ?>" <?php 
                 if ( true === $module['is_active'] ) {

@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    UltimaKit
  * @subpackage UltimaKit/includes
- * @author     Ankit Panchal <ankitpanchalweb7@gmail.com>
+ * @author     Ankit Panchal <developer@wpultimakit.com>
  */
 class UltimaKit_Deactivator {
 

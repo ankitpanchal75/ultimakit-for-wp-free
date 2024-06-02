@@ -285,7 +285,7 @@ class UltimaKit_Module_Duplicate_Pages_Posts extends UltimaKit_Module_Manager {
 
 	    foreach ( $types as $type ) {
 	        if ( ! in_array( $type->name, $types_array ) && $post->post_type != 'product' ) {
-	            $actions['wp_extended_duplicate'] = sprintf(
+	            $actions['ultimakit_for_wp'] = sprintf(
 	                '<a href="%s" aria-label="%s" data-duplicate>%s</a>',
 	                admin_url( 'admin-ajax.php?action=ultimakit-duplicate-post&ultimakit_nonce='.wp_create_nonce('ultimakit-ajax-nonce').'&post_ID=' . $post->ID ),
 	                esc_attr( __( 'Duplicate', 'ultimakit-for-wp' ) ),

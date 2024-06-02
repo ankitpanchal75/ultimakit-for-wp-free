@@ -213,6 +213,20 @@ class UltimaKit_Helpers {
                             echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
                         }
                         break;
+                    case 'select2':
+                        echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br/>';
+                        echo '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" class="form-control select2" multiple="multiple">';
+                        if ( !empty( $value['options'] ) ) {
+                            foreach ( $value['options'] as $op_key => $op_value ) {
+                                $selected = selected( $op_key, $value['default'], false );
+                                echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $op_key ) . '">' . esc_html( $op_value ) . '</option>';
+                            }
+                        }
+                        echo '</select>';
+                        if ( !empty( $value['desc'] ) ) {
+                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                        }
+                        break;
                     case 'html':
                         echo $value['value'];
                         break;
@@ -543,6 +557,18 @@ class UltimaKit_Helpers {
             }
         }
         return $ipaddress;
+    }
+
+    public function get_all_user_roles() {
+        global $wp_roles;
+        $roles = array();
+        if ( !isset( $wp_roles ) ) {
+            $wp_roles = new WP_Roles();
+        }
+        foreach ( $wp_roles->roles as $role => $details ) {
+            $roles[$role] = $details['name'];
+        }
+        return $roles;
     }
 
 }

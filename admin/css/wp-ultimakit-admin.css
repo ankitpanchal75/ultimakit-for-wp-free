@@ -787,6 +787,9 @@
 	width: 100%;
 }
 
+.module_settings label{
+	font-weight: 500 !important;
+}
 .fs-notice.success{
 	color: #6610F2;
 }
@@ -836,4 +839,38 @@
 
 .modal-footer .btn{
 	margin-right: 20px;
+}
+
+.ultimakit_view_mode a{
+	text-decoration: none;
+	margin-right: 15px;
+}
+
+.ultimakit_view_mode a span{
+	font-size: 28px;
+	color: #6610F2;
+}
+
+#ultimakit_search_module.typing {
+    animation: typing 0.3s ease-in-out;
+}
+
+@keyframes typing {
+    0% { background-color: #fff; }
+    50% { background-color: #e0f7fa; }
+    100% { background-color: #fff; }
+}
+
+#wpukTabs li a span{
+	padding: 4px 10px;
+    background-color: #6610F2;
+    border-radius: 100%;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+#toast-container > div {
+   opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
 }

@@ -91,7 +91,6 @@ class UltimaKit_Module_Post_Page_Order extends UltimaKit_Module_Manager {
 		$this->is_active   = $this->isModuleActive( $this->ID );
 		$this->settings    = 'no';
 		$this->initializeModule();
-		$this->settings_link = '#';
 	}
 
 	/**
@@ -175,7 +174,7 @@ class UltimaKit_Module_Post_Page_Order extends UltimaKit_Module_Manager {
         $extra = http_build_query( array( "orderby" => "menu_order", "order" => "asc") );
         $query .= ( $query ? "&" : "" ) . $extra;
         $url = $path . "?" . $query;
-        wp_redirect( $url, 302, 'WP-Extended-Post-order' );
+        wp_redirect( $url, 302, 'ultimakit-for-wp' );
         exit;
       }
       else if( $_REQUEST['orderby'] === 'menu_order' ) {

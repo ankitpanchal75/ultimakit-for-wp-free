@@ -16,7 +16,7 @@
  * Plugin Name:       UltimaKit for WP
  * Plugin URI:        https://wpultimakit.com
  * Description:       <strong>UltimaKit for WP:</strong> The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            UltimaKit For WP
  * Author URI:        https://wpultimakit.com/
  * License:           GPL-2.0+
@@ -33,7 +33,7 @@ if ( !defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'ULTIMAKIT_FOR_WP_VERSION', '1.1.0' );
+define( 'ULTIMAKIT_FOR_WP_VERSION', '1.2.0' );
 define( 'ULTIMAKIT_FOR_WP_LOGO', plugins_url( 'admin/img/wp-ultimakit-logo.svg', __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_DASHBOARD', 'wp-ultimakit-dashboard' );
@@ -64,21 +64,22 @@ if ( function_exists( 'ufw_fs' ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/src/freemius/start.php';
                 $ufw_fs = fs_dynamic_init( array(
-                    'id'             => '15524',
-                    'slug'           => 'ultimakit-for-wp',
-                    'premium_slug'   => 'ultimakit-for-wp-pro',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_7242c13a2ba33bb432d938683d41a',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'Pro',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'menu'           => array(
+                    'id'              => '15524',
+                    'slug'            => 'ultimakit-for-wp',
+                    'premium_slug'    => 'ultimakit-for-wp-pro',
+                    'type'            => 'plugin',
+                    'public_key'      => 'pk_7242c13a2ba33bb432d938683d41a',
+                    'is_premium'      => false,
+                    'premium_suffix'  => 'Pro',
+                    'has_addons'      => false,
+                    'has_paid_plans'  => true,
+                    'has_affiliation' => 'all',
+                    'menu'            => array(
                         'slug'       => 'wp-ultimakit-dashboard',
                         'first-path' => 'admin.php?page=wp-ultimakit-dashboard',
                         'support'    => false,
                     ),
-                    'is_live'        => true,
+                    'is_live'         => true,
                 ) );
             }
             return $ufw_fs;

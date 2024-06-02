@@ -99,7 +99,6 @@
 
 		    });
 
-
 			let settingsActions = $( '.ultimakit_settings_action' );
 			settingsActions.on(
 				'change',
@@ -156,6 +155,7 @@
 				function (event) {
 					let module_id     = jQuery( this ).attr( 'id' );
 					let module_status = '';
+					let module_name = jQuery( this ).attr( 'module-name' );
 
 					// The event object contains information about the change event.
 					if (event.target.checked) {
@@ -166,11 +166,15 @@
 
 					const restUrl   = ultimakit_ajax.url;
 					const toastConf = {
-						timeOut: 1000, // Adjust display time as needed (in milliseconds).
-						positionClass: 'toast-top-right', // Adjust position as needed.
+						timeOut: 1500, // Adjust display time as needed (in milliseconds).
+						positionClass: 'toast-top-center', // Adjust position as needed.
 						progressBar: true, // Show a progress bar.
 						closeButton: true,
 						preventDuplicates: true,
+						"showEasing": "linear",
+						"hideEasing": "linear",
+						"showMethod": "fadeIn",
+						"hideMethod": "fadeOut",
 						iconClasses: {
 							success: "toast-success",
 					        warning: "toast-warning" 
@@ -192,7 +196,7 @@
 							},
 							success: function (response) {
 								if ('on' === response.data.status) {
-									toastr.success( response.data.message, '', toastConf );
+									toastr.success( module_name + ' ' + response.data.message, '', toastConf );
 									if ( 'on' == module_status ) {
 										jQuery( '.' + module_id ).show();
 									} else {
@@ -202,10 +206,17 @@
 										function () {
 											window.location.reload();
 										},
-										1000
+										1500
 									);
 								} else {
-									toastr.error( response.data.message, '', toastConf );
+									toastr.error( module_name + ' ' + response.data.message, '', toastConf );
+
+									setTimeout(
+										function () {
+											window.location.reload();
+										},
+										1500
+									);
 								}
 							},
 							error: function () {
@@ -299,7 +310,6 @@
 				}
 			);
 
-
 			$('#ultimakit_category, #ultimakit_status').change(function() {
 	            var selectedCategory = $('#ultimakit_category').val();
 	            var selectedStatus = $('#ultimakit_status').val();
@@ -320,6 +330,82 @@
 	            });
 	        });
 
+			$('#ultimakit_search_module').on('input', function(e) {
+		        // Avoid doing anything if Enter key is pressed
+		        if (e.keyCode === 13) {
+		            return;
+		        }
+
+		        // Get the search query and convert to lowercase
+		        var query = $(this).val().toLowerCase();
+
+		        if (query.length < 2) {
+		            return;
+		        }
+
+		        var freeModules = 0;
+		        var proModules = 0;
+
+		        // Loop through each module-block
+		        $('.module-block').each(function() {
+		            // Get the title and description text
+		            var title = $(this).find('.module-title').text().toLowerCase();
+		            var description = $(this).find('.module-description').text().toLowerCase();
+
+		            // Check if the query matches the title or description
+		            if (title.includes(query) || description.includes(query)) {
+		                // If a match is found, display the block
+		                $(this).show();
+		                if ($(this).find('.module-box').hasClass('free-plan')) {
+		                    freeModules += 1;
+		                }
+		                if ($(this).find('.module-box').hasClass('pro-plan')) {
+		                    proModules += 1;
+		                }
+		            } else {
+		                // If no match is found, hide the block
+		                $(this).hide();
+		            }
+		        });
+
+		        // Update the count in tabs
+		        $("#free-modules-tab").find('span').remove();
+		        $("#free-modules-tab").append('<span>' + freeModules + '</span>');
+
+		        $("#pro-modules-tab").find('span').remove();
+		        $("#pro-modules-tab").append('<span>' + proModules + '</span>');
+		    });
+
+		    // Optional: Clear counts when the input is cleared
+		    $('#ultimakit_search_module').on('input', function() {
+		        if ($(this).val().length === 0) {
+		            $('.module-block').show(); // Show all blocks when input is cleared
+
+		            $("#free-modules-tab").find('span').remove();
+		            $("#free-modules-tab").append('<span>0</span>');
+
+		            $("#pro-modules-tab").find('span').remove();
+		            $("#pro-modules-tab").append('<span>0</span>');
+		        }
+		    });
+
+		    $('#ultimakit_full_screen').on('click', function(e) {
+		    	e.preventDefault();
+		    	 // Loop through each module-block
+		        $('.module-block').each(function() {
+		        	$(this).find('.module-description').hide();
+		        	$(this).find('.module-box').css('height','100px');
+		        });
+		    });
+
+		    $('#ultimakit_small_screen').on('click', function(e) {
+		    	e.preventDefault();
+		    	 // Loop through each module-block
+		        $('.module-block').each(function() {
+		        	$(this).find('.module-description').show();
+		        	$(this).find('.module-box').css('height','200px');
+		        });
+		    });
 		}
 	);
 	

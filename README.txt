@@ -1,15 +1,15 @@
 === The Essential WordPress Toolkit - UltimaKit For WP ===
-Contributors: ankitmaru, ankitpanchal, freemius
+Contributors: ankitmaru
 Donate link: https://wpankit.com/
 Tags: optimizations, tools, enhancements, widgets, tweaks
 Requires at least: 5.6
 Tested up to: 6.5.3
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simplify WordPress. Manage content, customize design, enhance security – one plugin.
+Duplicate posts, reorder posts, resize images, send emails via SMTP, edit the admin menu, add custom CSS/code, disable Gutenberg, and much more - all in a single plugin.
 
 == Description ==
 
@@ -50,6 +50,12 @@ Simplify WordPress. Manage content, customize design, enhance security – one p
 23. [Wider Admin Menu](https://wpultimakit.com/wider-admin-menu-in-wordpress/) - Give the admin menu more room to better accommodate wider items.
 24. [Custom CSS](https://wpultimakit.com/features/add-custom-css-in-wordpress/) - Add Custom CSS on Frontend.
 25. [Custom JS](https://wpultimakit.com/features/add-custom-js-in-wordpress/) - Add Custom JS on Frontend.
+26. [Change Admin Email](https://wpultimakit.com/change-admin-email-in-wordpress-without-email-verification) - Change Admin Email Without Verification.
+27. [Show Active Plugins First](https://wpultimakit.com/list-active-plugins-first-in-wordpress) - Show active plugins first in the plugin list. This is especially helpful if you have many inactive plugins.
+28. [Redirect After Login](https://wpultimakit.com/redirect-after-login-in-wordpress) - Redirect users to specific pages upon logging in, enhancing user experience and engagement.
+29. [Redirect After Logout](https://wpultimakit.com/redirect-after-logout-in-wordpress) - Redirect users to specific pages upon logging out, enhancing user experience and engagement.
+30. [Term Order](https://wpultimakit.com/set-term-order-in-wordpress) - Enable drag-and-drop term reordering in WordPress.
+
 
 ### Pro Modules
 1. [Admin UI](https://wpultimakit.com/customise-admin-ui-in-wordpress/) - Easily customize the WordPress admin interface.
@@ -67,7 +73,20 @@ Simplify WordPress. Manage content, customize design, enhance security – one p
 13. [Post Type Switcher](https://wpultimakit.com/post-type-switcher-in-wordpress/) - Switch post type between available post types quickly and easily.
 14. [Quick Admin Search](https://wpultimakit.com/quick-search-posts-and-terms-from-admin-panel-in-wordpress) - Effortlessly Navigate Through the Admin Panel
 15. [SMTP Email](https://wpultimakit.com/configure-smtp-in-wordpress/) - The SMTP email module improves the delivery of email.
-15. [Advanced Custom JS & CSS](https://wpultimakit.com/add-custom-css-and-js-scripts-to-your-wordpress-website) - Add multiple Javascript and CSS snippets your website.
+16. [Advanced Custom JS & CSS](https://wpultimakit.com/add-custom-css-and-js-scripts-to-your-wordpress-website) - Add multiple Javascript and CSS snippets your website.
+17. [Front-End Login Form](https://wpultimakit.com/setup-front-end-login-form-in-wordpress) - Adds a basic front-end login for to any page, post or widget.
+18. [UTM Builder](https://wpultimakit.com/utm-builder-in-wordpress) - Generate UTM tracking URLs easily.
+
+
+### You can check our other plugins:
+<ol>
+<li><a href ="https://wordpress.org/plugins/like-dislike-for-wp/">Like Dislike For WP</a></li>
+<li><a href ="https://wordpress.org/plugins/disable-block-editor-fullscreen-mode/">Disable Block Editor FullScreen mode</a></li>
+<li><a href="https://wordpress.org/plugins/hide-admin-bar-based-on-user-roles/">Hide Admin Bar Based on User Roles
+</a></li>
+</ol>
+
+
 
 ### 🔥 WHAT’S NEXT
 Need a specific feature? We're building 40+ new modules. Submit your request and help shape the future of UltimaKit.
@@ -115,15 +134,11 @@ Yes, It works with most recent releases and past releases as well.
 
 = What's the difference between the free and pro versions of UltimaKit For WP? =
 
-The free version offers a limited set of modules, while the pro version unlocks a wide range of advanced features, including more header and footer styles, additional menu options, and priority support and 25+ modules.
+The free version offers a limited set of modules, while the pro version unlocks a wide range of advanced features, including more header and footer styles, additional menu options, and priority support and 30+ modules.
 
 = Can I upgrade from the free version to the pro version later? =
 
 Yes! You can upgrade to the pro version at any time to access all the premium features and benefits.
-
-= Is there a refund policy for the pro version? = 
-
-Yes, we offer a 7 days money-back guarantee if you're not satisfied with the pro version.
 
 = How do I install UltimaKit For WP? =
 
@@ -149,6 +164,9 @@ UltimaKit For WP is optimized for performance and should not significantly affec
 
 == Changelog ==
 
+= 1.2.0 = - 02.06.2024 =
+New modules added: (Free) - Change Admin Email, Show Active Plugins First, Redirect After Login, Redirect After Logout, Term Order; (PRO) - Front-End Login Form, UTM Builder; Modules listing layout updated; Minimize and maximize modules listing; Search modules feature added; Minor fixes & improvements.
+
 = 1.1.0 = - 21.05.2024 =
 New modules added: (Free) - Custom CSS, Custom JS, (PRO) - Advanced Custom JS & CSS, Minor Fixes & Improvements.
 
@@ -160,5 +178,5 @@ First release, Included 36+ modules (Free/Pro)
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-3+ new modules added, Minor Fixes & Improvements.
+= 1.2.0 =
+7+ new modules added, Minor Fixes & Improvements.
