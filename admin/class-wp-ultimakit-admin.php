@@ -38,6 +38,8 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
      */
     private $version;
 
+    private $helpers;
+
     /**
      * Initialize the class and set its properties.
      *
@@ -48,6 +50,7 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
     public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
+        $this->helpers = new UltimaKit_Helpers();
     }
 
     /**
@@ -163,6 +166,50 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
                 'timeOut'           => 3000,
             ) );
         }
+    }
+
+    public function ultimakit_premium_upgrade_notice() {
+        if ( current_user_can( 'manage_options' ) && !ufw_fs()->is__premium_only() && !get_transient( 'ultimakit_premium_notice_hidden' ) ) {
+            $style = 'style="background: #fff; border: 5px solid #6610F2;max-width: 98%;"';
+            ?>
+			<div class="container-fluid p-0">
+				<div class="alert alert-info alert-dismissible fade show mt-3" <?php 
+            echo $style;
+            ?> role="alert">
+					<h5 class="alert-heading">
+						🚀 Upgrade to <strong>UltimaKit For WP</strong> PRO!
+					</h5>
+					<p>
+						Unlock powerful new modules for <strong>WooCommerce</strong> and <strong>WordPress</strong>! Enhance your site with advanced features like:
+					</p>
+					<ul>
+						<li>🛒 <strong>WooCommerce Add-Ons:</strong> Streamline your store management, improve conversions, and access exclusive tools.</li>
+						<li>🔧 <strong>Advanced WordPress Modules:</strong> Take control of customizations, security, and performance with our premium features.</li>
+					</ul>
+					<div class="mt-3">
+						<a href="https://your-upgrade-link.com" class="btn btn-outline-secondary" style="border-radius:20px;" target="_blank">Learn More</a>
+						<a href="https://your-upgrade-link.com" class="btn btn-primary" style="border-radius:20px;" target="_blank">Upgrade Now</a>
+					</div>
+					<button type="button" class="btn-close ultimakit-notice-dismiss" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</div>
+			<script type="text/javascript">
+				document.querySelector('.ultimakit-notice-dismiss').addEventListener('click', function() {
+					// Make an AJAX request to set the transient
+					fetch(ajaxurl + '?action=ultimakit_dismiss_notice');
+				});
+			</script>
+			<?php 
+        }
+    }
+
+    // Handle the AJAX request to set the transient
+    public function ultimakit_dismiss_notice() {
+        if ( current_user_can( 'manage_options' ) ) {
+            set_transient( 'ultimakit_premium_notice_hidden', true, 15 * DAY_IN_SECONDS );
+        }
+        wp_die();
+        // Terminate the request properly
     }
 
     /**
@@ -302,6 +349,7 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
      */
     public function ultimakit_get_modules() {
         $admin = new UltimaKit_Module_Manager();
+        $helper = new UltimaKit_Helpers();
         ?>
 		<div class="wrap">
 			<div class="container-fluid module-container">
@@ -337,6 +385,22 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
         ?></option>
 						            </select>
 						        </div>
+								<div style="margin-right: 10px;">
+						            <label for="status" style="margin-right: 5px;"><?php 
+        echo esc_html_e( 'Modules:', 'ultimakit-for-wp' );
+        ?></label>
+						            <select id="ultimakit_plans" style="width:110px;">
+										<option value="all"><?php 
+        echo esc_html_e( 'All Modules', 'ultimakit-for-wp' );
+        ?></option>
+										<option value="free-plan"><?php 
+        echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
+        ?></option>
+										<option value="pro-plan"><?php 
+        echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
+        ?></option>
+									</select>
+						        </div>
 						        <div style="margin-right: 10px;">
 						            <label for="search" style="margin-right: 5px;"><?php 
         echo esc_html_e( 'Search:', 'ultimakit-for-wp' );
@@ -363,7 +427,6 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 
 					<?php 
         $menu_active_class = "";
-        $pro_menu_active_class = "";
         $menu_active_class = "active show";
         ?>
 					<!-- Nav tabs -->
@@ -371,17 +434,21 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 						<li class="nav-item" role="presentation">
 							<a class="nav-link <?php 
         echo $menu_active_class;
-        ?>" id="free-modules-tab" data-bs-toggle="tab" href="#free-modules" role="tab" aria-controls="free-modules" aria-selected="true"><?php 
-        echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
+        ?>" id="wp-modules-tab" data-bs-toggle="tab" href="#wp-modules" role="tab" aria-controls="wp-modules" aria-selected="true"><?php 
+        echo esc_html_e( 'WordPress', 'ultimakit-for-wp' );
         ?></a>
 						</li>
+						<?php 
+        if ( $this->helpers->is_woocommerce_active() ) {
+            ?>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link <?php 
-        echo $pro_menu_active_class;
-        ?>" id="pro-modules-tab" data-bs-toggle="tab" href="#pro-modules" role="tab" aria-controls="pro-modules" aria-selected="true"><?php 
-        echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
-        ?></a>
+							<a class="nav-link " id="wc-modules-tab" data-bs-toggle="tab" href="#wc-modules" role="tab" aria-controls="wc-modules" aria-selected="true"><?php 
+            echo esc_html_e( 'WooCommerce', 'ultimakit-for-wp' );
+            ?></a>
 						</li>
+						<?php 
+        }
+        ?>
 						<li class="nav-item" role="presentation">
 							<a class="nav-link" href="https://wpultimakit.com" target="_blank"><?php 
         echo esc_html_e( 'Help', 'ultimakit-for-wp' );
@@ -393,170 +460,100 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 					<div class="tab-content" id="wpukTabsContent">
 						<div class="tab-pane fade show <?php 
         echo $menu_active_class;
-        ?>" id="free-modules" role="tabpanel" aria-labelledby="modules-tab">
-							<!-- Your modules content here -->
-							<div class="row">
+        ?>" id="wp-modules" role="tabpanel" aria-labelledby="modules-tab">
 
-								<!-- Your module listing below... -->
-								<?php 
-        $all_modules = $admin->getAllModules( 'free' );
+							<ul class="nav nav-tabs" id="wpukTabsInner" role="tablist">
+								<li class="nav-item" role="presentation">
+									<a class="nav-link <?php 
+        echo $menu_active_class;
+        ?>" id="wc-free-modules-tab" data-bs-toggle="tab" href="#wc-free-modules" role="tab" aria-controls="wc-free-modules" aria-selected="true"><?php 
+        echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
+        ?></a>
+								</li>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="wc-modules-tab" data-bs-toggle="tab" href="#wc-pro-modules" role="tab" aria-controls="wc-pro-modules" aria-selected="true"><?php 
+        echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
+        ?></a>
+								</li>
+							</ul>
+
+							<div class="tab-content" id="wpukTabsContentInner">
+								<div class="tab-pane fade show active" id="wc-free-modules" role="tabpanel" aria-labelledby="modules-tab">
+									<!-- Your modules content here -->
+									<div class="row">
+										<!-- Your module listing below... -->
+										<?php 
+        $all_modules = $admin->getAllModules( 'WordPress', 'free' );
         usort( $all_modules, function ( $a, $b ) {
             return $b['is_active'] - $a['is_active'];
         } );
-        if ( !empty( $all_modules ) ) {
-            foreach ( $all_modules as $module ) {
-                ?>
-											<div class="module-block col-sm-4 col-md-3 p-0 m-0 <?php 
-                echo esc_attr( $module['category'] );
-                ?> <?php 
-                echo ( true === $module['is_active'] ? 'active' : 'inactive' );
-                ?>">
-												<div class="module-box <?php 
-                echo esc_attr( $module['plan'] );
-                ?>-plan">
-													<!-- Module Title (Top-Left) -->
-													<h5 class="module-title"><?php 
-                echo esc_html( $module['name'] );
-                ?></h5>
-
-													<!-- Module Description (Below Title) -->
-													<p class="module-description"><?php 
-                echo esc_html( $module['description'] );
-                ?></p>
-
-													<div class="form-check form-switch module-switch">
-														<input type="checkbox" class="form-check-input ultimakit_module_action" module-name="<?php 
-                echo esc_attr( $module['name'] );
-                ?>" id="<?php 
-                echo esc_attr( $module['id'] );
-                ?>" <?php 
-                if ( true === $module['is_active'] ) {
-                    echo 'checked';
-                }
-                ?> >
-														<label class="form-check-label switch-label" for="<?php 
-                echo esc_attr( $module['id'] );
-                ?>">Toggle me</label>
-													</div>
-
-													<!-- Learn More Link (Bottom-Left) -->
-												<?php 
-                if ( isset( $module['settings'] ) && 'yes' == $module['settings'] ) {
-                    ?>
-														<a href="javascript:void()" class="
-														<?php 
-                    if ( !$module['is_active'] ) {
-                        echo 'ultimakit_hide_settings ';
-                    }
-                    ?>
-														learn-more-link <?php 
-                    echo esc_attr( $module['id'] );
-                    ?>"><?php 
-                    echo esc_html( __( 'Settings', 'ultimakit-for-wp' ) );
-                    ?></a>
-													<?php 
-                }
-                ?>
-													<span class="plugin-badge"><?php 
-                echo esc_html( $module['type'] );
-                ?></span>
-
-												<?php 
-                echo '<span class="doc-badge"><a href="' . esc_url( ULTIMAKIT_WEB_URL . $module['link'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></span>';
-                if ( isset( $module['plan'] ) && 'pro' === $module['plan'] ) {
-                    echo '<span class="pro-badge">' . esc_html__( 'PRO', 'ultimakit-for-wp' ) . '</span>';
-                } else {
-                    echo '<span class="free-badge">' . esc_html__( 'FREE', 'ultimakit-for-wp' ) . '</span>';
-                }
-                ?>
-												</div>
-											</div>
-											<?php 
-            }
-        }
+        $helper->get_module_block( $all_modules );
         ?>
+									</div>
+								</div>
+								<div class="tab-pane fade show" id="wc-pro-modules" role="tabpanel" aria-labelledby="modules-tab">
+									<!-- Your modules content here -->
+									<div class="row">
+										<!-- Your module listing below... -->
+										<?php 
+        $all_modules = $this->get_pro_modules( 'WordPress' );
+        $helper->get_module_block( $all_modules );
+        ?>
+									</div>
+								</div>
+							</div>
+							
+						</div> <!-- WordPress Tab End --->
+									
+						<?php 
+        if ( $this->helpers->is_woocommerce_active() ) {
+            ?>
+						<div class="tab-pane fade" id="wc-modules" role="tabpanel" aria-labelledby="modules-tab">
+
+							<ul class="nav nav-tabs" id="wpukTabsInner" role="tablist">
+								<li class="nav-item" role="presentation">
+									<a class="nav-link <?php 
+            echo $menu_active_class;
+            ?>" id="wp-free-modules-tab" data-bs-toggle="tab" href="#wp-free-modules" role="tab" aria-controls="wp-modules" aria-selected="true"><?php 
+            echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
+            ?></a>
+								</li>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="wp-modules-tab" data-bs-toggle="tab" href="#wp-pro-modules" role="tab" aria-controls="wp-modules" aria-selected="true"><?php 
+            echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
+            ?></a>
+								</li>
+							</ul>
+
+							<div class="tab-content" id="wpukTabsContentInner">
+								<div class="tab-pane fade show active" id="wp-free-modules" role="tabpanel" aria-labelledby="modules-tab">
+									<!-- Your modules content here -->
+									<div class="row">
+										<!-- Your module listing below... -->
+										<?php 
+            $all_modules = $admin->getAllModules( 'WooCommerce', 'free' );
+            usort( $all_modules, function ( $a, $b ) {
+                return $b['is_active'] - $a['is_active'];
+            } );
+            $helper->get_module_block( $all_modules );
+            ?>
+									</div>
+								</div>
+								<div class="tab-pane fade show" id="wp-pro-modules" role="tabpanel" aria-labelledby="modules-tab">
+									<!-- Your modules content here -->
+									<div class="row">
+										<!-- Your module listing below... -->
+										<?php 
+            $all_modules = $this->get_pro_modules( 'WooCommerce' );
+            $helper->get_module_block( $all_modules );
+            ?>
+									</div>
+								</div>
 							</div>
 						</div>
-
-						<div class="tab-pane fade <?php 
-        echo $pro_menu_active_class;
-        ?>" id="pro-modules" role="tabpanel" aria-labelledby="modules-tab">
-							<!-- Your modules content here -->
-							<div class="row">
-
-								<!-- Your module listing below... -->
-								<?php 
-        $admin = new UltimaKit_Module_Manager();
-        $all_modules = $admin->getAllModules( 'json' );
-        usort( $all_modules, function ( $a, $b ) {
-            return $b['is_active'] - $a['is_active'];
-        } );
-        if ( !empty( $all_modules ) ) {
-            foreach ( $all_modules as $module ) {
-                ?>
-											<div class="module-block col-sm-4 col-md-3 p-0 m-0 <?php 
-                echo esc_attr( $module['category'] );
-                ?> <?php 
-                echo ( true === $module['is_active'] ? 'active' : 'inactive' );
-                ?> <?php 
-                echo 'not_paying';
-                ?>">
-												<div class="module-box <?php 
-                echo esc_attr( $module['plan'] );
-                ?>-plan">
-													<!-- Module Title (Top-Left) -->
-													<h5 class="module-title"><?php 
-                echo esc_html( $module['name'] );
-                ?></h5>
-
-													<!-- Module Description (Below Title) -->
-													<p class="module-description"><?php 
-                echo esc_html( $module['description'] );
-                ?></p>
-
-													<div class="form-check form-switch module-switch">
-														<?php 
-                ?>
-													</div>
-
-													<!-- Learn More Link (Bottom-Left) -->
-												<?php 
-                if ( isset( $module['settings'] ) && 'yes' == $module['settings'] ) {
-                    ?>
-														<a href="javascript:void()" class="
-														<?php 
-                    if ( !$module['is_active'] ) {
-                        echo 'ultimakit_hide_settings ';
-                    }
-                    ?>
-														learn-more-link <?php 
-                    echo esc_attr( $module['id'] );
-                    ?>"><?php 
-                    echo esc_html( __( 'Settings', 'ultimakit-for-wp' ) );
-                    ?></a>
-													<?php 
-                }
-                ?>
-													<span class="plugin-badge"><?php 
-                echo esc_html( $module['type'] );
-                ?></span>
-
-												<?php 
-                echo '<span class="doc-badge"><a href="' . esc_url( ULTIMAKIT_WEB_URL . $module['link'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></span>';
-                if ( isset( $module['plan'] ) && 'pro' === $module['plan'] ) {
-                    echo '<span class="pro-badge">' . esc_html__( 'PRO', 'ultimakit-for-wp' ) . '</span>';
-                } else {
-                    echo '<span class="free-badge">' . esc_html__( 'FREE', 'ultimakit-for-wp' ) . '</span>';
-                }
-                ?>
-												</div>
-											</div>
-											<?php 
-            }
+						<?php 
         }
         ?>
-							</div>
-						</div>
 
 					</div>
 

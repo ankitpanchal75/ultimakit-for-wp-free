@@ -1,0 +1,744 @@
+$color_1: #FFD700;
+$color_2: #6610F2;
+$color_3: #666;
+$color_4: #FFFFFF;
+$color_5: #007BFF;
+$color_6: #0056b3;
+$color_7: #ffffff;
+$color_8: #333;
+$color_9: #999;
+$color_10: #fff;
+
+$font-family_1: 'Arial', sans-serif;
+
+$background-color_1: #6610F2;
+$background-color_2: #C0C0C0;
+$background-color_3: #FFD700;
+$background-color_4: #FFFFFF;
+$background-color_5: #ddd;
+$background-color_6: #fff;
+$background-color_7: #F2F2F2;
+$background-color_8: #007BFF;
+$background-color_9: #96588A;
+$background-color_10: #f7f8fc;
+$background-color_11: #0056b3;
+$background-color_12: #f2f4f8;
+$background-color_13: #4CAF50;
+$background-color_14: #F44336;
+
+$border-color_1: #6610F2;
+$border-color_2: #C0C0C0;
+$border-color_3: #FFD700;
+$border-color_4: #C0C0C0 #C0C0C0 #FFFFFF;
+$border-color_5: #555;
+$border-color_6: #0073e6;
+$border-left-color_1: #6610F2;
+
+/* Customizing Bootstrap Colors for WP UltimaKit */
+/* Primary Color */
+.btn-primary,
+.badge-primary,
+.bg-primary {
+  background-color: $background-color_1 !important;
+  border-color: $border-color_1 !important;
+}
+
+/* Secondary Color */
+.btn-secondary,
+.badge-secondary,
+.bg-secondary {
+  background-color: $background-color_2 !important;
+  border-color: $border-color_2 !important;
+}
+
+/* Highlight/Action Color */
+.btn-warning,
+.badge-warning,
+.bg-warning {
+  background-color: $background-color_3 !important;
+  border-color: $border-color_3 !important;
+}
+
+/* Additional Styling for WP UltimaKit Full-Width Navigation */
+.navbar {
+  font-family: $font-family_1;
+}
+
+.nav-item.nav-link {
+  &:hover {
+    color: $color_1 !important;
+  }
+
+  &:last-child {
+    padding: 5px 15px;
+    border: 2px solid $color_1;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: $background-color_3;
+      color: $color_2 !important;
+    }
+  }
+
+  &.get-pro {
+    padding: 5px 15px;
+    border: 2px solid $color_1;
+    border-radius: 20px;
+    background-color: $background-color_3;
+    color: $color_2;
+
+    &:hover {
+      background-color: $background-color_1;
+      color: $color_1 !important;
+    }
+  }
+}
+
+.module-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 15px;
+  background-color: $background-color_4;
+
+  .filters {
+    .filter_container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+
+      h4 {
+        margin-right: 20px;
+        color: $color_2;
+        font-size: 22px;
+      }
+
+      select,
+      input {
+        border: 2px solid $color_2;
+        border-radius: 10px;
+        padding: 5px;
+      }
+    }
+  }
+}
+
+.module-box {
+  background-color: $background-color_4;
+  border: 2px solid $background-color_2;
+  border-radius: 15px;
+  margin: 10px;
+  position: relative;
+  height: 200px;
+  box-sizing: border-box;
+
+  &:hover {
+    border: 2px solid $color_2;
+    box-shadow: 0 4px 8px rgba(102, 16, 242, 0.3), 0 6px 20px rgba(102, 16, 242, 0.25);
+  }
+}
+
+.module-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: $color_2;
+  font-size: 1.1rem;
+  max-width: 275px;
+}
+
+.module-description {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  font-size: 0.9em;
+  color: $color_3;
+  max-width: 90%;
+  margin-top: 15px;
+}
+
+.module-switch {
+  position: absolute;
+  top: 10px;
+  right: -30px;
+}
+
+.learn-more-link { 
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: $color_2;
+  text-decoration: none;
+  border: 2px solid $color_2;
+  padding: 0px 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  background-color: $background-color_4;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $background-color_1;
+    color: $color_4;
+  }
+}
+
+.pro-badge,
+.free-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: $color_4;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.8em;
+
+  &.pro-badge {
+    background: linear-gradient(45deg, $color_2, $color_1);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  &.free-badge {
+    background-color: $color_2;
+  }
+}
+
+.doc-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 140px;
+  color: $color_2;
+  padding: 1px 5px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: $color_2;
+  }
+}
+
+.WooCommerce{
+  .doc-badge {
+    margin-right:25px;
+  }
+}
+.form-check-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+
+  &:checked + .form-check-label {
+    &::before {
+      background-color: $background-color_1;
+    }
+
+    &::after {
+      left: 16px;
+    }
+  }
+}
+
+.form-check-label {
+  position: relative;
+  padding-left: 45px;
+  cursor: pointer;
+  font-weight: 600;
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 30px;
+    height: 16px;
+    background-color: $background-color_5;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: $background-color_6;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s;
+  }
+}
+
+/* Tabs */
+.nav-tabs {
+  border-bottom: 2px solid $background-color_2;
+  margin-bottom: 15px;
+
+  .nav-item {
+    margin-bottom: -2px;
+
+    .nav-link {
+      border-radius: 8px 8px 0 0;
+      border: 2px solid transparent;
+      color: $color_2;
+      padding: 10px 15px;
+      transition: all 0.3s;
+      box-shadow: none;
+
+      &:hover {
+        background-color: $background-color_7;
+        border-color: $background-color_2;
+        box-shadow: none;
+      }
+
+      &.active {
+        background-color: $background-color_4;
+        color: $color_2;
+        border-color: $border-color_4;
+      }
+    }
+  }
+}
+
+.tab-content {
+  border: 2px solid $background-color_2;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 20px;
+  margin-top: -17px;
+}
+
+/* Plugin Badge */
+.plugin-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 60px;
+  color: $color_4;
+  background-color: $background-color_8;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.8em;
+  z-index: 10;
+
+  &.woocommerce {
+    background-color: $background-color_9;
+  }
+}
+
+/* Module Filters */
+.module-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .form-select,
+  .form-control {
+    width: auto;
+  }
+}
+
+.search-control {
+  width: 20%;
+
+  input {
+    width: 100% !important;
+  }
+
+  .form-control {
+    width: 200px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: $background-color_6;
+    color: $color_8;
+
+    &:hover {
+      border-color: $border-color_5;
+    }
+
+    &:focus {
+      border-color: $border-color_6;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 115, 230, 0.5);
+    }
+  }
+}
+
+/* Help Content */
+.help-container {
+  background-color: $background-color_10;
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.help-section {
+  margin-bottom: 40px;
+
+  h2 {
+    border-bottom: 2px solid #e0e2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+  }
+
+  a {
+    color: $color_5;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $color_6;
+    }
+  }
+}
+
+.faqs {
+  .faq-item {
+    margin-bottom: 20px;
+    border-left: 4px solid $color_2;
+    padding-left: 15px;
+  }
+
+  h3 {
+    color: $color_2;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+}
+
+.plugins-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.plugin-item {
+  flex: 1;
+  max-width: calc(33.33% - 20px);
+  background-color: $background-color_10;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+
+  h3 {
+    font-size: 1.2em;
+    color: $color_2;
+    margin-bottom: 10px;
+  }
+}
+
+.plugin-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.explore-btn {
+  background-color: $background-color_8;
+  color: $color_7;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $background-color_11;
+  }
+}
+
+/* Plan Comparison */
+.ultimakit-plans-comparison-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: $background-color_12;
+}
+
+.ultimakit-plan {
+  flex: 1;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s;
+  background-color: $background-color_6;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-top: 0;
+    color: $color_2;
+  }
+}
+
+.ultimakit-price {
+  font-size: 30px;
+  margin: 15px 0;
+  font-weight: bold;
+  color: $color_2;
+}
+
+.ultimakit-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ultimakit-li {
+  padding: 5px 0;
+  color: $color_8;
+}
+
+.ultimakit-unavailable {
+  text-decoration: line-through;
+  color: $color_9;
+}
+
+.ultimakit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: $background-color_1;
+  color: $color_10;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $background-color_1;
+  }
+}
+
+/* Toast notifications */
+.toast-success {
+  background-color: $background-color_13;
+  color: $color_10;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.toast-error {
+  background-color: $background-color_14;
+  color: $color_10;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+/* Modal */
+.ultimakit_modal {
+  .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 1rem);
+    border-radius: 0px;
+  }
+
+  .modal-dialog {
+    margin: 0 auto;
+  }
+
+  .modal-header {
+    background-color: $background-color_1;
+    padding: 10px;
+    letter-spacing: 0.5px;
+    border-radius: 0px;
+  }
+
+  .modal-title {
+    color: $color_1;
+    font-weight: 400;
+  }
+
+  ul {
+    padding-left: 5px;
+    font-size: 0.9em;
+
+    input[type="text"],
+    select {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  .modal-footer {
+    padding: 5px;
+  }
+
+  .btn-secondary {
+    color: $color_2;
+    text-decoration: none;
+    border: 2px solid $color_2 !important;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    background-color: $background-color_4 !important;
+    cursor: pointer;
+
+    &:hover {
+      color: $color_4;
+      background-color: $background-color_1 !important;
+    }
+  }
+
+  .btn-primary {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+
+    &:hover {
+      color: $color_2;
+      border: 2px solid $color_2 !important;
+      background-color: $background-color_4 !important;
+    }
+  }
+}
+
+/* Module Settings */
+.module_settings {
+  ul {
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"] {
+    width: 100%;
+  }
+
+  label {
+    font-weight: 500 !important;
+  }
+
+  .module-switch {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-left: -40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.fs-notice.success {
+  color: $color_2;
+}
+
+.notice-success,
+div.updated {
+  border-left-color: $border-left-color_1;
+}
+
+.pro-plan {
+  background: #6610f20f;
+}
+
+.modal-body {
+  padding: 10px 20px;
+
+  select {
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}
+
+.not_paying {
+  opacity: 0.5;
+}
+
+.wpuk-version-info {
+  font-size: 8px;
+  letter-spacing: 1px;
+  float: right;
+  position: absolute;
+  right: 70px;
+  margin-top: 5px;
+}
+
+.modal-footer .btn {
+  margin-right: 20px;
+}
+
+.ultimakit_view_mode a {
+  text-decoration: none;
+  margin-right: 15px;
+
+  span {
+    font-size: 28px;
+    color: $color_2;
+  }
+}
+
+#ultimakit_search_module.typing {
+  animation: typing 0.3s ease-in-out;
+}
+
+@keyframes typing {
+  0% {
+    background-color: $background-color_6;
+  }
+  50% {
+    background-color: #e0f7fa;
+  }
+  100% {
+    background-color: $background-color_6;
+  }
+}
+
+#wpukTabs li a span {
+  padding: 4px 10px;
+  background-color: $background-color_1;
+  border-radius: 100%;
+  color: $color_7;
+  margin-left: 10px;
+}
+
+#toast-container > div {
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+}
+
+.pro-module-opacity{
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+#toast-container.toast-bottom-center>div, #toast-container.toast-top-center>div{
+  width: 500px;
+}
+
+.ultimakit_hide_settings{
+  display: none;
+}

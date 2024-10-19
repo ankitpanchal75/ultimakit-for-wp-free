@@ -166,6 +166,16 @@ class UltimaKit_Helpers {
                             echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
+                    case 'number':
+                        echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
+                        $placeholder = ( isset( $value['placeholder'] ) ? esc_attr( $value['placeholder'] ) : '' );
+                        $required = ( isset( $value['required'] ) ? 'required' : '' );
+                        $valueAttr = ( isset( $value['value'] ) ? esc_attr( $value['value'] ) : '' );
+                        echo '<input type="number" ' . $required . ' id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . $valueAttr . '" placeholder="' . $placeholder . '">';
+                        if ( !empty( $value['desc'] ) ) {
+                            echo '<br /><small>' . $value['desc'] . '</small>';
+                        }
+                        break;
                     case 'color':
                         echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
                         echo '<input type="text" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" class="ultimakit-color-picker" value="' . esc_attr( $value['value'] ) . '">';
@@ -579,6 +589,104 @@ class UltimaKit_Helpers {
             $roles[$role] = $details['name'];
         }
         return $roles;
+    }
+
+    public function is_woocommerce_active() {
+        return class_exists( 'WooCommerce' );
+    }
+
+    public function get_module_block( $all_modules = array() ) {
+        if ( !empty( $all_modules ) ) {
+            foreach ( $all_modules as $module ) {
+                ?>
+				<div class="module-block col-sm-3 col-md-4 p-0 m-0 <?php 
+                echo esc_attr( $this->add_non_paying_classes( $module['plan'] ) );
+                ?> <?php 
+                echo esc_attr( $module['category'] );
+                ?> <?php 
+                echo esc_attr( $module['type'] );
+                ?> <?php 
+                echo ( true === $module['is_active'] ? 'active' : 'inactive' );
+                ?>">
+					<div class="module-box <?php 
+                echo esc_attr( $module['type'] );
+                ?> <?php 
+                echo esc_attr( $module['plan'] );
+                ?>-plan">
+						<!-- Module Title (Top-Left) -->
+						<h5 class="module-title"><?php 
+                echo esc_html( $module['name'] );
+                ?></h5>
+
+						<!-- Module Description (Below Title) -->
+						<p class="module-description"><?php 
+                echo esc_html( $module['description'] );
+                ?></p>
+
+						<div class="form-check form-switch module-switch">
+							<input type="checkbox" class="form-check-input ultimakit_module_action" module-name="<?php 
+                echo esc_attr( $module['name'] );
+                ?>" id="<?php 
+                echo esc_attr( $module['id'] );
+                ?>" <?php 
+                if ( true === $module['is_active'] ) {
+                    echo 'checked';
+                }
+                ?> >
+							<label class="form-check-label switch-label" for="<?php 
+                echo esc_attr( $module['id'] );
+                ?>">Toggle me</label>
+						</div>
+
+						<!-- Learn More Link (Bottom-Left) -->
+					<?php 
+                if ( isset( $module['settings'] ) && 'yes' == $module['settings'] ) {
+                    ?>
+							<a href="javascript:void()" class="
+							<?php 
+                    if ( !$module['is_active'] ) {
+                        echo 'ultimakit_hide_settings ';
+                    }
+                    ?>
+							learn-more-link <?php 
+                    echo esc_attr( $module['id'] );
+                    ?>"><?php 
+                    echo esc_html( __( 'Settings', 'ultimakit-for-wp' ) );
+                    ?></a>
+						<?php 
+                }
+                ?>
+						<span class="plugin-badge"><?php 
+                echo esc_html( $module['type'] );
+                ?></span>
+
+					<?php 
+                echo '<span class="doc-badge"><a href="' . esc_url( ULTIMAKIT_WEB_URL . $module['link'] ) . '" target="_blank"><span class="dashicons dashicons-external"></span></a></span>';
+                if ( isset( $module['plan'] ) && 'pro' === $module['plan'] ) {
+                    echo '<span class="pro-badge">' . esc_html__( 'PRO', 'ultimakit-for-wp' ) . '</span>';
+                } else {
+                    echo '<span class="free-badge">' . esc_html__( 'FREE', 'ultimakit-for-wp' ) . '</span>';
+                }
+                ?>
+					</div>
+				</div>
+				<?php 
+            }
+        } else {
+            return array();
+        }
+    }
+
+    public function add_non_paying_classes( $plan = 'pro' ) {
+        $classes = '';
+        if ( 'pro' === $plan ) {
+            $classes .= 'pro-module-opacity not_paying';
+        }
+        return $classes;
+    }
+
+    public function woo_activation_check() {
+        return is_plugin_active( 'woocommerce/woocommerce.php' );
     }
 
 }

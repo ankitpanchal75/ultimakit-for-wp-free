@@ -4,7 +4,7 @@ Donate link: https://wpankit.com/
 Tags: all-in-one plugin, WordPress optimization plugin, custom post types, WordPress admin enhancer, Gutenberg blocks
 Requires at least: 5.6
 Tested up to: 6.6.2
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -151,13 +151,11 @@ UltimaKit For WP is optimized for performance and should not significantly affec
 == Screenshots ==
 
 1. screenshot-1.png
-2. screenshot-2.png
-3. screenshot-3.png
-4. screenshot-4.png
-5. screenshot-5.png
-6. screenshot-6.png
 
 == Changelog ==
+
+= 1.4.0 = - 19.10.2024 =
+New modules added: 24(Free+Pro) - WooCommerce & WordPress new modules added; Minor admin UI fixes & improvements.
 
 = 1.3.0 = - 25.09.2024 =
 New modules added: (PRO) - Custom Post Type & Custom Taxonomy module added; Minor admin UI fixes & improvements.
@@ -176,5 +174,5 @@ First release, Included 36+ modules (Free/Pro)
 
 == Upgrade Notice ==
 
-= 1.3.0 =
-1 new Custom Post Type & Custom Taxonomy module added, Minor Fixes & Improvements.
+= 1.4.0 =
+Total 24 modules added, WooCommerce modules added.

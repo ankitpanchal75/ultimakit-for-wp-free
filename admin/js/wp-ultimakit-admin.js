@@ -106,7 +106,7 @@
 					const restUrl   = ultimakit_ajax.url;
 					const toastConf = {
 						timeOut: 1000, // Adjust display time as needed (in milliseconds).
-						positionClass: 'toast-top-right', // Adjust position as needed.
+						positionClass: 'toast-top-center', // Adjust position as needed.
 						progressBar: true, // Show a progress bar.
 						closeButton: true,
 						preventDuplicates: true,
@@ -314,10 +314,7 @@
 	            var selectedCategory = $('#ultimakit_category').val();
 	            var selectedStatus = $('#ultimakit_status').val();
 
-
-	            $('.module-block').each(function() {
-	                var category = $(this).data('category');
-	                var status = $(this).data('status');
+	            $('.module-block').each(function() {	
 	                
 	                var categoryMatch = (selectedCategory === 'all' || $(this).hasClass(selectedCategory));
 	                var statusMatch = (selectedStatus === 'all' || $(this).hasClass(selectedStatus));
@@ -330,65 +327,94 @@
 	            });
 	        });
 
+			$('#ultimakit_plans').on('change', function() {
+				const selectedPlan = $(this).val();
+				console.log(selectedPlan);
+				// Show/Hide modules based on dropdown selection
+				$('.module-box').each(function() {
+					const $module = $(this);
+					
+					// Show all modules if "All Plans" is selected
+					if (selectedPlan === 'all') {
+						$module.closest('.module-block').show();
+					} else {
+						// Check if the module has the class matching the selected plan
+						if ($module.hasClass(selectedPlan)) {
+							$module.closest('.module-block').show();
+						} else {
+							$module.closest('.module-block').hide();
+						}
+					}
+				});
+			});
+			
+
 			$('#ultimakit_search_module').on('input', function(e) {
-		        // Avoid doing anything if Enter key is pressed
-		        if (e.keyCode === 13) {
-		            return;
-		        }
-
-		        // Get the search query and convert to lowercase
-		        var query = $(this).val().toLowerCase();
-
-		        if (query.length < 2) {
-		            return;
-		        }
-
-		        var freeModules = 0;
-		        var proModules = 0;
-
-		        // Loop through each module-block
-		        $('.module-block').each(function() {
-		            // Get the title and description text
-		            var title = $(this).find('.module-title').text().toLowerCase();
-		            var description = $(this).find('.module-description').text().toLowerCase();
-
-		            // Check if the query matches the title or description
-		            if (title.includes(query) || description.includes(query)) {
-		                // If a match is found, display the block
-		                $(this).show();
-		                if ($(this).find('.module-box').hasClass('free-plan')) {
-		                    freeModules += 1;
-		                }
-		                if ($(this).find('.module-box').hasClass('pro-plan')) {
-		                    proModules += 1;
-		                }
-		            } else {
-		                // If no match is found, hide the block
-		                $(this).hide();
-		            }
-		        });
-
-		        // Update the count in tabs
-		        $("#free-modules-tab").find('span').remove();
-		        $("#free-modules-tab").append('<span>' + freeModules + '</span>');
-
-		        $("#pro-modules-tab").find('span').remove();
-		        $("#pro-modules-tab").append('<span>' + proModules + '</span>');
-		    });
-
-		    // Optional: Clear counts when the input is cleared
-		    $('#ultimakit_search_module').on('input', function() {
-		        if ($(this).val().length === 0) {
-		            $('.module-block').show(); // Show all blocks when input is cleared
-
-		            $("#free-modules-tab").find('span').remove();
-		            $("#free-modules-tab").append('<span>0</span>');
-
-		            $("#pro-modules-tab").find('span').remove();
-		            $("#pro-modules-tab").append('<span>0</span>');
-		        }
-		    });
-
+				// Avoid processing if Enter key is pressed
+				const query = $(this).val().toLowerCase();
+			
+				// If input is cleared, reset the modules display and counts
+				if (query.length === 0) {
+					$('.module-block').show();
+					$("#wp-modules-tab").find('span').remove();
+					$("#wc-modules-tab").find('span').remove();
+					return;
+				}
+			
+				// Continue only if query length is at least 2
+				if (query.length < 2) return;
+			
+				let wpModules = 0, wcModules = 0;
+			
+				// Loop through each module-block and toggle visibility based on match
+				$('.module-block').each(function() {
+					const $module = $(this);
+					const title = $module.find('.module-title').text().toLowerCase();
+					const description = $module.find('.module-description').text().toLowerCase();
+			
+					const isMatch = title.includes(query) || description.includes(query);
+					$module.toggle(isMatch);
+			
+					// Increment count if match is found
+					if (isMatch) {
+						if ($module.find('.module-box').hasClass('WordPress')) wpModules++;
+						if ($module.find('.module-box').hasClass('WooCommerce')) wcModules++;
+					}
+				});
+			
+				// Update the counts in tabs using your custom function
+				wpuk_updateTabCount("#wp-modules-tab", wpModules);
+				wpuk_updateTabCount("#wc-modules-tab", wcModules);
+			
+				// Check which count is higher and alert the user
+				if (wpModules > 0 || wcModules > 0) {
+					const higherValue = Math.max(wpModules, wcModules);
+					const higherCategory = wpModules > wcModules ? 'wp-modules' : 'wc-modules';
+					$('#'+higherCategory).addClass('active show');
+					$('#wpukTabs li a').removeClass('active');
+					$('#'+higherCategory+'-tab').addClass('active');
+				}
+			});
+			
+			// Function to dynamically add or update tab count
+			function wpuk_updateTabCount(tabSelector, count) {
+				const $tab = $(tabSelector);
+				const $span = $tab.find('span');
+			
+				// If span doesn't exist, create it
+				if ($span.length === 0) {
+					$tab.append('<span>' + count + '</span>');
+				} else {
+					$span.text(count);
+				}
+			}
+			
+			// Remove span tags on page refresh
+			$(window).on('beforeunload', function() {
+				$("#wp-modules-tab").find('span').remove();
+				$("#wc-modules-tab").find('span').remove();
+			});
+			
 			function ultimakit_update_module_width( view = 'full' ) {
 				$.ajax({
 				    url: ultimakit_ajax.url,
@@ -435,6 +461,9 @@
 	);
 	
 
+	
+
+	
 	document.addEventListener('DOMContentLoaded', function() {
 	    var texts = document.querySelectorAll('selector-for-element-containing-text'); // Replace with actual selector
 	    texts.forEach(function(element) {

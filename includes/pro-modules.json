@@ -1,16 +1,5 @@
 [
     {
-        "id": "ultimakit_module_custom_Post_Type_Taxonomy",
-        "name": "Custom Post Type / Taxonomy",
-        "description": "Register Custom Post Types, Custom Taxonomy",
-        "category": "Admin",
-        "plan": "pro",
-        "type": "WordPress",
-        "link": "acustom-post-type-and-custom-taxonomy-in-wordpress",
-        "is_active": false,
-        "settings": "no"
-    },
-    {
         "id": "ultimakit_module_admin_ui",
         "name": "Admin UI",
         "description": "Easily customize the WordPress admin interface.",
@@ -19,7 +8,8 @@
         "type": "WordPress",
         "link": "admin-ui-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_advanced_custom_js_css",
@@ -30,7 +20,20 @@
         "type": "WordPress",
         "link": "add-custom-css-and-js-scripts-to-your-wordpress-website",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_custom_Post_Type_Taxonomy",
+        "name": "Custom Post Type \/ Taxonomy",
+        "description": "Register Custom Post Types, Custom Taxonomy",
+        "category": "Admin",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "custom-post-type-and-custom-taxonomy-in-wordpress",
+        "is_active": false,
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_debug_mode",
@@ -41,7 +44,8 @@
         "type": "WordPress",
         "link": "enable-debug-mode-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_disable_auto_updates",
@@ -52,7 +56,8 @@
         "type": "WordPress",
         "link": "disable-auto-updates-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "disable-auto-updates-for-wordpress"
     },
     {
         "id": "ultimakit_module_disable_blog",
@@ -63,7 +68,8 @@
         "type": "WordPress",
         "link": "disable-blog-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_disable_comments",
@@ -74,7 +80,8 @@
         "type": "WordPress",
         "link": "disable-comments-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_export_post_pages",
@@ -85,7 +92,8 @@
         "type": "WordPress",
         "link": "export-posts-pages-with-custom-fields-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_export_users",
@@ -96,7 +104,20 @@
         "type": "WordPress",
         "link": "export-users-with-custom-usermeta-custom-field-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_front_end_login_form",
+        "name": "Front-End Login Form",
+        "description": "Adds a basic front-end login for to any page, post or widget.",
+        "category": "User",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "setup-front-end-login-form-in-wordpress",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_hide_admin_notices_advanced",
@@ -105,9 +126,10 @@
         "category": "Admin",
         "plan": "pro",
         "type": "WordPress",
-        "link": "hide-admin-notices-in-wordpress",
+        "link": "hide-admin-notices-advanced-in-wordpress",
         "is_active": false,
-        "settings": "yes"
+        "settings": "yes",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_limit_login_attempts",
@@ -118,7 +140,8 @@
         "type": "WordPress",
         "link": "limit-login-attempts-in-wordpress",
         "is_active": false,
-        "settings": "yes"
+        "settings": "yes",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_maintenance_mode",
@@ -129,7 +152,8 @@
         "type": "WordPress",
         "link": "maintenance-mode-in-wordpress",
         "is_active": false,
-        "settings": "yes"
+        "settings": "yes",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_media_trash",
@@ -140,18 +164,20 @@
         "type": "WordPress",
         "link": "enable-media-trash-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_obfuscate_author_slugs",
         "name": "Obfuscate Author Slugs",
         "description": "This feature hides the actual usernames of authors, improving security by making it more difficult for attackers to guess login details.",
-        "category": "Users",
+        "category": "User",
         "plan": "pro",
         "type": "WordPress",
         "link": "obfuscate-author-slugs-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_post_type_switcher",
@@ -162,7 +188,20 @@
         "type": "WordPress",
         "link": "post-type-switcher-in-wordpress",
         "is_active": false,
-        "settings": "no"
+        "settings": "no",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_quick_admin_search",
+        "name": "Quick Admin Search",
+        "description": "Your Search: Effortlessly Navigate Through the Admin Panel",
+        "category": "Admin",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "quick-search-posts-and-terms-from-admin-panel-in-wordpress",
+        "is_active": false,
+        "settings": "no",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_smtp_email",
@@ -173,18 +212,8 @@
         "type": "WordPress",
         "link": "setup-smtp-in-wordpress",
         "is_active": false,
-        "settings": "yes"
-    },
-    {
-        "id": "ultimakit_module_front_end_login_form",
-        "name": "Front-end Login Form",
-        "description": "Adds a basic front-end login for to any page, post or widget.",
-        "category": "User",
-        "plan": "pro",
-        "type": "WordPress",
-        "link": "setup-front-end-login-form-in-wordpress",
-        "is_active": false,
-        "settings": "yes"
+        "settings": "yes",
+        "settings_link": "#"
     },
     {
         "id": "ultimakit_module_utm_builder",
@@ -195,6 +224,91 @@
         "type": "WordPress",
         "link": "utm-builder-in-wordpress",
         "is_active": false,
-        "settings": "yes"
+        "settings": "yes",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_custom_add_to_cart_button_text",
+        "name": "Woo - Custom \"Add to Cart\" Button Text",
+        "description": "Hide Shipping Methods When Free Shipping is Available.",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "set-custom-text-to-add-to-cart-button-in-woocommerce",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_custom_sale_badge_text",
+        "name": "Woo - Custom Sale Badge Text",
+        "description": "Set Custom Sale Badge Text on WooCommerce Shop Page.",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "custom-sale-badget-text-in-woocommerce",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_disable_coupons",
+        "name": "Woo - Disable Coupons",
+        "description": "Disable coupons for all products and on a per-product basis.",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "disable-coupons-in-woocommerce",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_disable_reviews_for_all_products",
+        "name": "Woo - Disable Reviews For All Products",
+        "description": "Disable Reviews For All Products. (Remove comments support from Post Type: Product)",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "disable-reviews-for-all-products-in-woocommerce",
+        "is_active": false,
+        "settings": "no",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_limit_purchase_quantity_per_product",
+        "name": "Woo - Limit Purchase Quantity Product",
+        "description": "allows store owners to control the number of units of a particular product that a customer can purchase in a single order or over multiple orders.",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "set-limit-purchase-quantity-per-product-in-woocommerce",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_product_timer",
+        "name": "Woo - Product Timer",
+        "description": "Set a product timer in products. [Configure the timer from the product edit page.]",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "set-product-timer-in-woocommerce",
+        "is_active": false,
+        "settings": "no",
+        "settings_link": "#"
+    },
+    {
+        "id": "ultimakit_module_wc_show_stock_level_display",
+        "name": "Woo - Show Stock Level Display",
+        "description": "Display stock level on product details page.",
+        "category": "Shop",
+        "plan": "pro",
+        "type": "WooCommerce",
+        "link": "show-stock-level-display-on-product-page-in-woocommerce",
+        "is_active": false,
+        "settings": "yes",
+        "settings_link": "#"
     }
 ]

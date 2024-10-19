@@ -97,7 +97,7 @@ class UltimaKit_Public {
 		 */
 
 		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-ultimakit-public.js', array( 'jquery' ), $this->version, false );
-
+		do_action('ultimakit_public_enqueue_scripts');
 	}
 
 

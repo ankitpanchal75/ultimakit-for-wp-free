@@ -160,6 +160,10 @@ class UltimaKit {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ultimakit_admin_menu' );
 		$this->loader->add_action( 'admin_head', $plugin_admin, 'ultimakit_admin_head' );
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'ultimakit_premium_upgrade_notice' );
+		$this->loader->add_action( 'wp_ajax_ultimakit_dismiss_notice', $plugin_admin, 'ultimakit_dismiss_notice' );
+		
+
 	}
 
 	/**
