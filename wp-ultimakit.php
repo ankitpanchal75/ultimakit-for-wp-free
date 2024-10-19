@@ -16,7 +16,7 @@
  * Plugin Name:       UltimaKit for WP
  * Plugin URI:        https://wpultimakit.com
  * Description:       <strong>UltimaKit for WP:</strong> The WordPress Toolkit Built With You in Mind. Essential features, ongoing development – shape the future of your WordPress experience.
- * Version:           1.2.0
+ * Version:           1.3.0
  * Author:            UltimaKit For WP
  * Author URI:        https://wpultimakit.com/
  * License:           GPL-2.0+
@@ -33,7 +33,7 @@ if ( !defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'ULTIMAKIT_FOR_WP_VERSION', '1.2.0' );
+define( 'ULTIMAKIT_FOR_WP_VERSION', '1.3.0' );
 define( 'ULTIMAKIT_FOR_WP_LOGO', plugins_url( 'admin/img/wp-ultimakit-logo.svg', __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ULTIMAKIT_FOR_WP_DASHBOARD', 'wp-ultimakit-dashboard' );
@@ -77,7 +77,7 @@ if ( function_exists( 'ufw_fs' ) ) {
                     'menu'            => array(
                         'slug'       => 'wp-ultimakit-dashboard',
                         'first-path' => 'admin.php?page=wp-ultimakit-dashboard',
-                        'support'    => false,
+                        'support'    => true,
                     ),
                     'is_live'         => true,
                 ) );
@@ -172,15 +172,10 @@ if ( function_exists( 'ufw_fs' ) ) {
     function ultimakit_run_wp_ultimakit() {
         $plugin = new UltimaKit();
         $plugin->run();
+        if ( class_exists( 'UltimaKit_Module_Manager' ) ) {
+            new UltimaKit_Module_Manager();
+        }
     }
 
     ultimakit_run_wp_ultimakit();
-    /**
-     * This will initiat all modules from this plugin.
-     */
-    function ultimakit_init_modules() {
-        new UltimaKit_Module_Manager();
-    }
-
-    add_action( 'wp_loaded', 'ultimakit_init_modules' );
 }

@@ -159,6 +159,7 @@ class UltimaKit {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ultimakit_admin_menu' );
+		$this->loader->add_action( 'admin_head', $plugin_admin, 'ultimakit_admin_head' );
 	}
 
 	/**
@@ -174,6 +175,7 @@ class UltimaKit {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $plugin_public, 'init_hook_executed' );
 	}
 
 	/**
@@ -215,4 +217,5 @@ class UltimaKit {
 	public function get_version() {
 		return $this->version;
 	}
+
 }

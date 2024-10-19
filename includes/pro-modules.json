@@ -1,5 +1,16 @@
 [
     {
+        "id": "ultimakit_module_custom_Post_Type_Taxonomy",
+        "name": "Custom Post Type / Taxonomy",
+        "description": "Register Custom Post Types, Custom Taxonomy",
+        "category": "Admin",
+        "plan": "pro",
+        "type": "WordPress",
+        "link": "acustom-post-type-and-custom-taxonomy-in-wordpress",
+        "is_active": false,
+        "settings": "no"
+    },
+    {
         "id": "ultimakit_module_admin_ui",
         "name": "Admin UI",
         "description": "Easily customize the WordPress admin interface.",

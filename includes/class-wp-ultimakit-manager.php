@@ -13,6 +13,7 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 	protected $settings_link  = '#';
 	public $modules;
 	public $module_settings_obj;
+	
 
 	public function __construct() {
 		$this->ultimakit_initializeModules();
@@ -21,6 +22,8 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 		// Register AJAX actions for logged-in users
 		add_action('wp_ajax_export_ultimakit_settings', array( $this, 'export_settings_to_json') );
 		add_action('wp_ajax_import_ultimakit_settings', array( $this, 'import_settings_from_json') );
+
+		add_action( 'wp_ajax_ultimakit_update_module_width', array( $this, 'ultimakit_update_module_width' ) );
 	}
 
 	public function ultimakit_initializeModules() {
@@ -342,4 +345,20 @@ class UltimaKit_Module_Manager extends UltimaKit_Helpers {
 	    wp_send_json_error('No file uploaded');
 	}
 
+	public function ultimakit_update_module_width(){
+		// Check for user capability
+	    if (!current_user_can('manage_options')) {
+	        wp_send_json_error('You do not have sufficient permissions', 403);
+	    }
+
+	    // Verify the nonce
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ultimakit_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unauthorized', 'ultimakit-for-wp' ) ), 401 );
+		}	
+
+		$view_modue = sanitize_text_field( $_POST['view'] );
+
+		update_option('ultimakit_modules_list_view', $view_modue);
+		wp_send_json_success('View settings successfully updated.');
+	}
 }

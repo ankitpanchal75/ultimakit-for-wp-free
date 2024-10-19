@@ -57,11 +57,11 @@
 	border: 2px solid #FFD700;
 	border-radius: 20px;
 	background-color: #FFD700;
-	color: #6610F2;
+	color: #3498DB;
 }
 
 .nav-item.nav-link.get-pro:hover {
-	background-color: #6610F2;
+	background-color: #3498DB;
 	color: #FFD700 !important;
 }
 
@@ -81,19 +81,19 @@
 
 .module-container .filters .filter_container h4{
 	margin-right: 20px;
-	color: #6610F2;
+	color: #3498DB;
 	font-size: 22px;
 }
 
 .module-container .filters .filter_container select{
-	border: 2px solid #6610F2;
+	border: 2px solid #3498DB;
 	border-radius: 10px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
 
 .module-container .filters .filter_container input{
-	border: 2px solid #6610F2;
+	border: 2px solid #3498DB;
 	border-radius: 10px;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -111,7 +111,7 @@
 }
 
 .module-box:hover {
-	border: 2px solid #6610F2;
+	border: 2px solid #3498DB;
 	box-shadow: 0 4px 8px rgba(102, 16, 242, 0.3), 0 6px 20px rgba(102, 16, 242, 0.25);
 }
 
@@ -119,7 +119,7 @@
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	color: #6610F2;
+	color: #3498DB;
 	font-size: 1.1rem;
 	max-width: 195px;
 }
@@ -144,11 +144,11 @@
 	position: absolute;
 	bottom: 10px;
 	left: 10px;
-	color: #6610F2;
+	color: #3498DB;
 	/* Deep Purple text color */
 	text-decoration: none;
 	/* Removes the underline */
-	border: 2px solid #6610F2;
+	border: 2px solid #3498DB;
 	/* Deep Purple border */
 	padding: 5px 10px;
 	/* Padding around the text */
@@ -164,7 +164,7 @@
 }
 
 .learn-more-link:hover {
-	background-color: #6610F2;
+	background-color: #3498DB;
 	/* Deep Purple background on hover */
 	color: #FFFFFF;
 	/* White text on hover */
@@ -192,7 +192,7 @@
 	right: 10px;
 	color: #FFFFFF;
 	/* White text */
-	background-color: #6610F2;
+	background-color: #3498DB;
 	/* Gradient from Deep Purple to Gold */
 	padding: 2px 8px;
 	border-radius: 8px;
@@ -203,7 +203,7 @@
 	position: absolute;
     bottom: 10px;
     right: 140px;
-    color: #6610F2;
+    color: #3498DB;
     padding: 1px 5px;
     border-radius: 8px;
     font-size: 0.9em;
@@ -212,7 +212,7 @@
 
 .doc-badge a{
 	text-decoration: none;
-	color: #6610F2;
+	color: #3498DB;
 }
 
 /* Hide the default checkbox */
@@ -279,7 +279,7 @@
 
 /* When the switch is checked */
 .form-check-input:checked+.form-check-label::before {
-	background-color: #6610F2;
+	background-color: #3498DB;
 	/* Deep Purple for active state */
 }
 
@@ -308,7 +308,7 @@
 	/* Rounded top corners */
 	border: 2px solid transparent;
 	/* Transparent border which will change on hover and active state */
-	color: #6610F2;
+	color: #3498DB;
 	/* Deep Purple text color */
 	padding: 10px 15px;
 	/* Slightly larger padding for better click area */
@@ -330,7 +330,7 @@
 .nav-tabs .nav-link.active {
 	background-color: #FFFFFF;
 	/* White background */
-	color: #6610F2;
+	color: #3498DB;
 	/* Deep Purple text color for consistency */
 	border-color: #C0C0C0 #C0C0C0 #FFFFFF;
 	/* Borders on the top, left, and right with the bottom transparent (to blend with tab content below) */
@@ -368,7 +368,7 @@
 	bottom: 10px;
 	right: 10px;
 	color: #FFFFFF;
-	background-color: #6610F2;
+	background-color: #3498DB;
 	padding: 2px 8px;
 	border-radius: 8px;
 	font-size: 0.8em;
@@ -428,14 +428,14 @@
 
 .faqs .faq-item {
 	margin-bottom: 20px;
-	border-left: 4px solid #6610F2;
+	border-left: 4px solid #3498DB;
 	/* A left border highlight for FAQs */
 	padding-left: 15px;
 	/* Padding to offset the FAQ content from the left border */
 }
 
 .faqs h3 {
-	color: #6610F2;
+	color: #3498DB;
 	font-size: 1.2em;
 	margin-bottom: 10px;
 }
@@ -494,7 +494,7 @@
 
 .plugin-item h3 {
 	font-size: 1.2em;
-	color: #6610F2;
+	color: #3498DB;
 	/* Deep purple for title */
 	margin-bottom: 10px;
 }
@@ -552,7 +552,7 @@
 .ultimakit-plan h2 {
 	font-size: 24px;
 	margin-top: 0;
-	color: #6610F2;
+	color: #3498DB;
 	/* Blue title color */
 }
 
@@ -561,7 +561,7 @@
 	font-size: 30px;
 	margin: 15px 0;
 	font-weight: bold;
-	color: #6610F2;
+	color: #3498DB;
 	/* Blue price color */
 }
 
@@ -589,7 +589,7 @@
 .ultimakit-btn {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #6610F2;
+	background-color: #3498DB;
 	/* Blue button background */
 	color: #fff;
 	/* White button text color */
@@ -601,7 +601,7 @@
 
 /* Button Hover Effect */
 .ultimakit-btn:hover {
-	background-color: #6610F2;
+	background-color: #3498DB;
 	/* Darker blue on hover */
 }
 
@@ -720,7 +720,7 @@
 }
 
 .ultimakit_modal .modal-header {
-	background-color: #6610F2;
+	background-color: #3498DB;
 	padding: 10px;
 	letter-spacing: 0.5px;
 	border-radius: 0px;
@@ -747,7 +747,7 @@
 }
 
 .ultimakit_modal .btn-secondary {
-	color: #6610F2;
+	color: #3498DB;
 	text-decoration: none;
 	border: 2px solid #6610F2 !important;
 	padding: 5px 10px;
@@ -771,7 +771,7 @@
 }
 
 .ultimakit_modal .btn-primary:hover {
-	color: #6610F2;
+	color: #3498DB;
 	border: 2px solid #6610F2 !important;
 	background-color: #FFFFFF !important;
 }
@@ -791,10 +791,10 @@
 	font-weight: 500 !important;
 }
 .fs-notice.success{
-	color: #6610F2;
+	color: #3498DB;
 }
 .notice-success, div.updated{
-	border-left-color: #6610F2;
+	border-left-color: #3498DB;
 }
 
 .pro-plan{
@@ -848,7 +848,7 @@
 
 .ultimakit_view_mode a span{
 	font-size: 28px;
-	color: #6610F2;
+	color: #3498DB;
 }
 
 #ultimakit_search_module.typing {
@@ -863,7 +863,7 @@
 
 #wpukTabs li a span{
 	padding: 4px 10px;
-    background-color: #6610F2;
+    background-color: #3498DB;
     border-radius: 100%;
     color: #ffffff;
     margin-left: 10px;

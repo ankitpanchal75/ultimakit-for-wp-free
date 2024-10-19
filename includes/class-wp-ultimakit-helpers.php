@@ -158,16 +158,19 @@ class UltimaKit_Helpers {
                 switch ( $value['type'] ) {
                     case 'text':
                         echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
-                        echo '<input type="text" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value['value'] ) . '">';
+                        $placeholder = ( isset( $value['placeholder'] ) ? esc_attr( $value['placeholder'] ) : '' );
+                        $required = ( isset( $value['required'] ) ? 'required' : '' );
+                        $valueAttr = ( isset( $value['value'] ) ? esc_attr( $value['value'] ) : '' );
+                        echo '<input type="text" ' . $required . ' id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . $valueAttr . '" placeholder="' . $placeholder . '">';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'color':
                         echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
                         echo '<input type="text" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" class="ultimakit-color-picker" value="' . esc_attr( $value['value'] ) . '">';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'hidden':
@@ -177,14 +180,14 @@ class UltimaKit_Helpers {
                         echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
                         echo '<textarea rows="5" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '">' . esc_attr( $value['value'] ) . '</textarea>';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'password':
                         echo '<label for="' . esc_attr( $key ) . '">' . esc_html( $value['label'] ) . '</label><br />';
                         echo '<input type="password" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value['value'] ) . '">';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'checkbox':
@@ -193,7 +196,11 @@ class UltimaKit_Helpers {
                         break;
                     case 'switch':
                         $checked = ( 'on' === $value['value'] ? 'checked' : '' );
-                        echo '<div class="form-check form-switch module-switch"><input ' . esc_attr( $checked ) . ' class="form-check-input" type="checkbox" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value['value'] ) . '"> <label class="form-check-label switch-label" for="' . esc_attr( $key ) . '">toggle me</label>' . esc_html( $value['label'] ) . '</div>';
+                        echo '<div class="form-check form-switch module-switch"><input ' . esc_attr( $checked ) . ' class="form-check-input" type="checkbox" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value['value'] ) . '"> <label class="form-check-label switch-label" for="' . esc_attr( $key ) . '">toggle me</label>' . esc_html( $value['label'] );
+                        if ( !empty( $value['desc'] ) ) {
+                            echo '<br /><small>' . $value['desc'] . '</small>';
+                        }
+                        echo '</div>';
                         break;
                     case 'radio':
                         $checked = ( 'on' === $value['value'] ? 'checked="checked"' : '' );
@@ -204,13 +211,16 @@ class UltimaKit_Helpers {
                         echo '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '">';
                         if ( !empty( $value['options'] ) ) {
                             foreach ( $value['options'] as $op_key => $op_value ) {
-                                $selected = selected( $op_key, $value['default'], false );
+                                // Check if 'default' exists in $value, if not, set an empty string or a fallback value
+                                $default_value = ( isset( $value['default'] ) ? $value['default'] : '' );
+                                // Use the $default_value for comparison
+                                $selected = selected( $op_key, $default_value, false );
                                 echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $op_key ) . '">' . esc_html( $op_value ) . '</option>';
                             }
                         }
                         echo '</select>';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'select2':
@@ -224,7 +234,7 @@ class UltimaKit_Helpers {
                         }
                         echo '</select>';
                         if ( !empty( $value['desc'] ) ) {
-                            echo '<br /><small>' . esc_html( $value['desc'] ) . '</small>';
+                            echo '<br /><small>' . $value['desc'] . '</small>';
                         }
                         break;
                     case 'html':

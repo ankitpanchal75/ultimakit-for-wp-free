@@ -389,23 +389,48 @@
 		        }
 		    });
 
-		    $('#ultimakit_full_screen').on('click', function(e) {
+			function ultimakit_update_module_width( view = 'full' ) {
+				$.ajax({
+				    url: ultimakit_ajax.url,
+				    type: 'POST',
+				    data: {
+				        action: 'ultimakit_update_module_width',
+						view: view,
+						nonce: ultimakit_ajax.nonce
+				    },
+				    success: function (response) {
+				    },
+				    error: function (error) {
+				        toastr.error('Error: AJAX request failed');
+				    },
+				});
+			}
+
+		    $('#ultimakit_small_screen').on('click', function(e) {
 		    	e.preventDefault();
+
+				ultimakit_update_module_width('small');
+
 		    	 // Loop through each module-block
 		        $('.module-block').each(function() {
 		        	$(this).find('.module-description').hide();
 		        	$(this).find('.module-box').css('height','100px');
 		        });
+
 		    });
 
-		    $('#ultimakit_small_screen').on('click', function(e) {
+		    $('#ultimakit_full_screen').on('click', function(e) {
 		    	e.preventDefault();
+
+				ultimakit_update_module_width('full');
+
 		    	 // Loop through each module-block
 		        $('.module-block').each(function() {
 		        	$(this).find('.module-description').show();
 		        	$(this).find('.module-box').css('height','200px');
 		        });
 		    });
+			
 		}
 	);
 	

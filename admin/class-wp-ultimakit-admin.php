@@ -99,7 +99,7 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
             );
             wp_enqueue_style(
                 $this->plugin_name,
-                plugin_dir_url( __FILE__ ) . 'css/wp-ultimakit-admin.css',
+                plugin_dir_url( __FILE__ ) . 'css/main.css',
                 array(),
                 $this->version,
                 'all'
@@ -349,10 +349,10 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 						            <label for="view" style="margin-right: 5px;"><?php 
         echo esc_html_e( 'View:', 'ultimakit-for-wp' );
         ?></label>
-						            <a href="javascript:void(0);" id="ultimakit_full_screen">
+						            <a href="javascript:void(0);" id="ultimakit_small_screen">
 							            <span class="dashicons dashicons-editor-contract"></span>
 							        </a>
-							        <a href="javascript:void(0);" id="ultimakit_small_screen">
+							        <a href="javascript:void(0);" id="ultimakit_full_screen">
 							            <span class="dashicons dashicons-editor-expand"></span>
 							        </a>
 						        </div>
@@ -360,15 +360,25 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 						</div>
 
 					</div>
+
+					<?php 
+        $menu_active_class = "";
+        $pro_menu_active_class = "";
+        $menu_active_class = "active show";
+        ?>
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" id="wpukTabs" role="tablist">
 						<li class="nav-item" role="presentation">
-							<a class="nav-link active" id="free-modules-tab" data-bs-toggle="tab" href="#free-modules" role="tab" aria-controls="free-modules" aria-selected="true"><?php 
+							<a class="nav-link <?php 
+        echo $menu_active_class;
+        ?>" id="free-modules-tab" data-bs-toggle="tab" href="#free-modules" role="tab" aria-controls="free-modules" aria-selected="true"><?php 
         echo esc_html_e( 'Free Modules', 'ultimakit-for-wp' );
         ?></a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link " id="pro-modules-tab" data-bs-toggle="tab" href="#pro-modules" role="tab" aria-controls="pro-modules" aria-selected="true"><?php 
+							<a class="nav-link <?php 
+        echo $pro_menu_active_class;
+        ?>" id="pro-modules-tab" data-bs-toggle="tab" href="#pro-modules" role="tab" aria-controls="pro-modules" aria-selected="true"><?php 
         echo esc_html_e( 'Pro Modules', 'ultimakit-for-wp' );
         ?></a>
 						</li>
@@ -381,7 +391,9 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 
 					<!-- Tab panes -->
 					<div class="tab-content" id="wpukTabsContent">
-						<div class="tab-pane fade show active" id="free-modules" role="tabpanel" aria-labelledby="modules-tab">
+						<div class="tab-pane fade show <?php 
+        echo $menu_active_class;
+        ?>" id="free-modules" role="tabpanel" aria-labelledby="modules-tab">
 							<!-- Your modules content here -->
 							<div class="row">
 
@@ -466,7 +478,9 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 							</div>
 						</div>
 
-						<div class="tab-pane fade " id="pro-modules" role="tabpanel" aria-labelledby="modules-tab">
+						<div class="tab-pane fade <?php 
+        echo $pro_menu_active_class;
+        ?>" id="pro-modules" role="tabpanel" aria-labelledby="modules-tab">
 							<!-- Your modules content here -->
 							<div class="row">
 
@@ -551,6 +565,16 @@ class UltimaKit_Admin extends UltimaKit_Module_Manager {
 			</div>
 		</div>
 		<?php 
+    }
+
+    public function ultimakit_admin_head() {
+        echo '<style>';
+        $view_mode = get_option( 'ultimakit_modules_list_view', true );
+        if ( 'small' === $view_mode ) {
+            echo '.module-description{display:none;}';
+            echo '.module-box{height:100px;}';
+        }
+        echo '</style>';
     }
 
 }
